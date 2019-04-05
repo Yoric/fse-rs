@@ -1,7 +1,4 @@
-pub mod bench;
-pub mod commandline;
 pub mod entropy_common;
-pub mod fileio;
 pub mod fse_compress;
 pub mod fse_decompress;
 pub mod fseU16;
