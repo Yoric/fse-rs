@@ -2,7 +2,6 @@ use libc;
 #[header_src = "/usr/include/i386/_types.h"]
 pub mod _types_h {
     pub type __darwin_size_t = libc::c_ulong;
-    use super::{libc};
 }
 #[header_src = "/usr/include/sys/_types/_size_t.h"]
 pub mod _size_t_h {
@@ -12,27 +11,22 @@ pub mod _size_t_h {
 #[header_src = "/usr/include/sys/_types/_int16_t.h"]
 pub mod _int16_t_h {
     pub type int16_t = libc::c_short;
-    use super::{libc};
 }
 #[header_src = "/usr/include/_types/_uint8_t.h"]
 pub mod _uint8_t_h {
     pub type uint8_t = libc::c_uchar;
-    use super::{libc};
 }
 #[header_src = "/usr/include/_types/_uint16_t.h"]
 pub mod _uint16_t_h {
     pub type uint16_t = libc::c_ushort;
-    use super::{libc};
 }
 #[header_src = "/usr/include/_types/_uint32_t.h"]
 pub mod _uint32_t_h {
     pub type uint32_t = libc::c_uint;
-    use super::{libc};
 }
 #[header_src = "/usr/include/_types/_uint64_t.h"]
 pub mod _uint64_t_h {
     pub type uint64_t = libc::c_ulonglong;
-    use super::{libc};
 }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/mem.h"]
 pub mod mem_h {
@@ -129,7 +123,6 @@ pub mod error_public_h {
     pub const FSE_error_dstSize_tooSmall: unnamed_0 = 2;
     pub const FSE_error_GENERIC: unnamed_0 = 1;
     pub const FSE_error_no_error: unnamed_0 = 0;
-    use super::{libc};
 }
 #[header_src =
       "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/bitstream.h"]
@@ -196,7 +189,6 @@ pub mod bitstream_h {
         pub endPtr: *mut libc::c_char,
     }
     use super::_size_t_h::{size_t};
-    use super::{libc};
 }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/fse.h"]
 pub mod fse_h {
@@ -204,7 +196,6 @@ pub mod fse_h {
     Note that FSE_CTable size depends on 'tableLog' and 'maxSymbolValue' */
     /* don't allocate that. It's only meant to be more restrictive than void* */
     pub type FSE_CTable = libc::c_uint;
-    use super::{libc};
     use super::_size_t_h::{size_t};
     extern "C" {
         /*-*****************************************
@@ -336,7 +327,6 @@ pub mod huf_h {
     pub const HUF_repeat_none: HUF_repeat = 0;
     /* incomplete type */
     pub type HUF_CElt = HUF_CElt_s;
-    use super::{libc};
     use super::huf_compress_c::{HUF_CElt_s};
     use super::_size_t_h::{size_t};
     use super::mem_h::{U32, BYTE};
@@ -396,11 +386,9 @@ pub mod huf_compress_c {
     use super::mem_h::{U16, BYTE, U32};
     use super::huf_h::{HUF_CElt};
     use super::_size_t_h::{size_t};
-    use super::{libc};
 }
 #[header_src = "/usr/include/string.h"]
 pub mod string_h {
-    use super::{libc};
     extern "C" {
         #[no_mangle]
         pub fn memcpy(_: *mut libc::c_void, _: *const libc::c_void,
@@ -416,7 +404,6 @@ pub mod error_private_h { }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/hist.h"]
 pub mod hist_h {
     use super::_size_t_h::{size_t};
-    use super::{libc};
     extern "C" {
         /* --- advanced histogram functions --- */
         /* * HIST_count_wksp() :

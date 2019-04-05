@@ -3,17 +3,14 @@ use libc;
       "/usr/local/Cellar/llvm/7.0.1/lib/clang/7.0.1/include/stddef.h"]
 pub mod stddef_h {
     pub type size_t = libc::c_ulong;
-    use super::{libc};
 }
 #[header_src = "/usr/include/_types/_uint8_t.h"]
 pub mod _uint8_t_h {
     pub type uint8_t = libc::c_uchar;
-    use super::{libc};
 }
 #[header_src = "/usr/include/_types/_uint32_t.h"]
 pub mod _uint32_t_h {
     pub type uint32_t = libc::c_uint;
-    use super::{libc};
 }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/mem.h"]
 pub mod mem_h {
@@ -82,11 +79,9 @@ pub mod error_public_h {
     pub const FSE_error_dstSize_tooSmall: unnamed = 2;
     pub const FSE_error_GENERIC: unnamed = 1;
     pub const FSE_error_no_error: unnamed = 0;
-    use super::{libc};
 }
 #[header_src = "/usr/include/string.h"]
 pub mod string_h {
-    use super::{libc};
     extern "C" {
         #[no_mangle]
         pub fn memset(_: *mut libc::c_void, _: libc::c_int, _: libc::c_ulong)
@@ -95,7 +90,6 @@ pub mod string_h {
 }
 #[header_src = "/usr/include/assert.h"]
 pub mod assert_h {
-    use super::{libc};
     extern "C" {
         #[no_mangle]
         pub fn __assert_rtn(_: *const libc::c_char, _: *const libc::c_char,
@@ -108,7 +102,6 @@ pub mod error_private_h { }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/hist.h"]
 pub mod hist_h {
     use super::stddef_h::{size_t};
-    use super::{libc};
 }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/hist.c"]
 pub mod hist_c { }

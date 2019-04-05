@@ -4,7 +4,6 @@ use libc;
 pub mod stddef_h {
     pub type ptrdiff_t = libc::c_long;
     pub type size_t = libc::c_ulong;
-    use super::{libc};
 }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/mem.h"]
 pub mod mem_h {
@@ -71,12 +70,10 @@ pub mod mem_h {
 #[header_src = "/usr/include/_types/_uint8_t.h"]
 pub mod _uint8_t_h {
     pub type uint8_t = libc::c_uchar;
-    use super::{libc};
 }
 #[header_src = "/usr/include/_types/_uint16_t.h"]
 pub mod _uint16_t_h {
     pub type uint16_t = libc::c_ushort;
-    use super::{libc};
 }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/fse.h"]
 pub mod fse_h {
@@ -192,7 +189,6 @@ or to save and provide normalized distribution using external method.
         pub tableLog: U16,
         pub fastMode: U16,
     }
-    use super::{libc};
     use super::stddef_h::{ptrdiff_t, size_t};
     use super::mem_h::{U32, U16};
     extern "C" {
@@ -369,17 +365,14 @@ pub mod bitstream_h {
     pub const BIT_DStream_endOfBuffer: BIT_DStream_status = 1;
     pub const BIT_DStream_unfinished: BIT_DStream_status = 0;
     use super::stddef_h::{size_t};
-    use super::{libc};
 }
 #[header_src = "/usr/include/_types/_uint64_t.h"]
 pub mod _uint64_t_h {
     pub type uint64_t = libc::c_ulonglong;
-    use super::{libc};
 }
 #[header_src = "/usr/include/_types/_uint32_t.h"]
 pub mod _uint32_t_h {
     pub type uint32_t = libc::c_uint;
-    use super::{libc};
 }
 #[header_src =
       "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/error_public.h"]
@@ -431,12 +424,10 @@ pub mod error_public_h {
     pub type unnamed_1 = libc::c_uint;
     pub const FSE_error_workSpace_tooSmall: unnamed_1 = 8;
     pub const FSE_error_no_error: unnamed_1 = 0;
-    use super::{libc};
 }
 #[header_src = "/usr/include/sys/_types/_int16_t.h"]
 pub mod _int16_t_h {
     pub type int16_t = libc::c_short;
-    use super::{libc};
 }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/fseU16.c"]
 pub mod fseU16_c {
@@ -502,7 +493,6 @@ pub mod fseU16_c {
         pub nbBits_symbol: [u8; 2],
     }
     use super::fse_h::{FSE_DTable, FSE_CTable, FSE_DState_t};
-    use super::{libc};
     use super::stddef_h::{size_t};
     use super::mem_h::{U16};
     use super::bitstream_h::{BIT_DStream_t};
@@ -510,11 +500,9 @@ pub mod fseU16_c {
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/fseU16.h"]
 pub mod fseU16_h {
     use super::stddef_h::{size_t};
-    use super::{libc};
 }
 #[header_src = "/usr/include/assert.h"]
 pub mod assert_h {
-    use super::{libc};
     extern "C" {
         #[no_mangle]
         pub fn __assert_rtn(_: *const libc::c_char, _: *const libc::c_char,
@@ -526,7 +514,6 @@ pub mod assert_h {
 pub mod error_private_h { }
 #[header_src = "/usr/include/string.h"]
 pub mod string_h {
-    use super::{libc};
     extern "C" {
         #[no_mangle]
         pub fn memset(_: *mut libc::c_void, _: libc::c_int, _: libc::c_ulong)
@@ -538,7 +525,6 @@ pub mod string_h {
 }
 #[header_src = "/usr/include/malloc/_malloc.h"]
 pub mod _malloc_h {
-    use super::{libc};
     extern "C" {
         #[no_mangle]
         pub fn malloc(_: libc::c_ulong) -> *mut libc::c_void;

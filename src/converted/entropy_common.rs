@@ -3,17 +3,14 @@ use libc;
       "/usr/local/Cellar/llvm/7.0.1/lib/clang/7.0.1/include/stddef.h"]
 pub mod stddef_h {
     pub type size_t = libc::c_ulong;
-    use super::{libc};
 }
 #[header_src = "/usr/include/_types/_uint8_t.h"]
 pub mod _uint8_t_h {
     pub type uint8_t = libc::c_uchar;
-    use super::{libc};
 }
 #[header_src = "/usr/include/_types/_uint32_t.h"]
 pub mod _uint32_t_h {
     pub type uint32_t = libc::c_uint;
-    use super::{libc};
 }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/mem.h"]
 pub mod mem_h {
@@ -90,7 +87,6 @@ pub mod error_public_h {
     pub const FSE_error_dstSize_tooSmall: FSE_ErrorCode = 2;
     pub const FSE_error_GENERIC: FSE_ErrorCode = 1;
     pub const FSE_error_no_error: FSE_ErrorCode = 0;
-    use super::{libc};
 }
 #[header_src =
       "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/error_private.h"]
@@ -148,7 +144,6 @@ pub mod fse_h {
     Note that its size depends on 'tableLog' */
     /* don't allocate that. It's just a way to be more restrictive than void* */
     pub type FSE_DTable = libc::c_uint;
-    use super::{libc};
     use super::stddef_h::{size_t};
     extern "C" {
         /* *< build a fake FSE_DTable, designed to always generate the same symbolValue */
@@ -163,7 +158,6 @@ pub mod fse_h {
 }
 #[header_src = "/usr/include/string.h"]
 pub mod string_h {
-    use super::{libc};
     extern "C" {
         #[no_mangle]
         pub fn memcpy(_: *mut libc::c_void, _: *const libc::c_void,
@@ -175,7 +169,6 @@ pub mod string_h {
 }
 #[header_src = "/usr/include/assert.h"]
 pub mod assert_h {
-    use super::{libc};
     extern "C" {
         #[no_mangle]
         pub fn __assert_rtn(_: *const libc::c_char, _: *const libc::c_char,
@@ -187,7 +180,6 @@ pub mod assert_h {
 pub mod bitstream_h { }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/huf.h"]
 pub mod huf_h {
-    use super::{libc};
     use super::stddef_h::{size_t};
     use super::mem_h::{BYTE, U32};
 }

@@ -2,7 +2,6 @@ use libc;
 #[header_src = "/usr/include/i386/_types.h"]
 pub mod _types_h {
     pub type __darwin_size_t = libc::c_ulong;
-    use super::{libc};
 }
 #[header_src = "/usr/include/sys/_types/_size_t.h"]
 pub mod _size_t_h {
@@ -12,22 +11,18 @@ pub mod _size_t_h {
 #[header_src = "/usr/include/_types/_uint8_t.h"]
 pub mod _uint8_t_h {
     pub type uint8_t = libc::c_uchar;
-    use super::{libc};
 }
 #[header_src = "/usr/include/_types/_uint16_t.h"]
 pub mod _uint16_t_h {
     pub type uint16_t = libc::c_ushort;
-    use super::{libc};
 }
 #[header_src = "/usr/include/_types/_uint32_t.h"]
 pub mod _uint32_t_h {
     pub type uint32_t = libc::c_uint;
-    use super::{libc};
 }
 #[header_src = "/usr/include/_types/_uint64_t.h"]
 pub mod _uint64_t_h {
     pub type uint64_t = libc::c_ulonglong;
-    use super::{libc};
 }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/mem.h"]
 pub mod mem_h {
@@ -122,7 +117,6 @@ pub mod error_public_h {
     pub const FSE_error_dstSize_tooSmall: unnamed_0 = 2;
     pub const FSE_error_GENERIC: unnamed_0 = 1;
     pub const FSE_error_no_error: unnamed_0 = 0;
-    use super::{libc};
 }
 #[header_src =
       "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/bitstream.h"]
@@ -162,7 +156,6 @@ pub mod bitstream_h {
     pub const BIT_DStream_endOfBuffer: BIT_DStream_status = 1;
     pub const BIT_DStream_unfinished: BIT_DStream_status = 0;
     use super::_size_t_h::{size_t};
-    use super::{libc};
 }
 #[header_src =
       "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/huf_decompress.c"]
@@ -294,7 +287,6 @@ pub mod huf_decompress_c {
     pub type unnamed_2 = libc::c_uint;
     pub const DEBUG_static_assert_0: unnamed_2 = 1;
     use super::_size_t_h::{size_t};
-    use super::{libc};
     use super::mem_h::{U32, BYTE, U16};
 }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/huf.h"]
@@ -302,7 +294,6 @@ pub mod huf_h {
     pub type HUF_DTable = U32;
     use super::mem_h::{U32, BYTE};
     use super::_size_t_h::{size_t};
-    use super::{libc};
     extern "C" {
         /* ! HUF_readStats() :
  *  Read compact Huffman tree, saved by HUF_writeCTable().
@@ -318,7 +309,6 @@ pub mod huf_h {
 }
 #[header_src = "/usr/include/string.h"]
 pub mod string_h {
-    use super::{libc};
     extern "C" {
         #[no_mangle]
         pub fn memcpy(_: *mut libc::c_void, _: *const libc::c_void,
