@@ -11,28 +11,6 @@ pub mod _uint8_t_h {
 pub mod _uint32_t_h {
     pub type uint32_t = libc::c_uint;
 }
-#[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/mem.h"]
-pub mod mem_h {
-    /*-**************************************************************
-    *  Basic Types
-    *****************************************************************/
-    /* C99 */
-    pub type BYTE = uint8_t;
-    pub type U32 = uint32_t;
-    #[derive(Copy, Clone)]
-    #[repr(C)]
-    pub union unnamed {
-        pub u: U32,
-        pub c: [BYTE; 4],
-    }
-    #[derive(Copy, Clone)]
-    #[repr(C, packed)]
-    pub struct unalign32 {
-        pub v: U32,
-    }
-    use super::_uint32_t_h::uint32_t;
-    use super::_uint8_t_h::uint8_t;
-}
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/error_public.h"]
 pub mod error_public_h {
     /* ******************************************************************
@@ -152,19 +130,6 @@ pub mod fse_h {
         ) -> size_t;
     }
 }
-#[header_src = "/usr/include/string.h"]
-pub mod string_h {
-    extern "C" {
-        #[no_mangle]
-        pub fn memcpy(
-            _: *mut libc::c_void,
-            _: *const libc::c_void,
-            _: libc::c_ulong,
-        ) -> *mut libc::c_void;
-        #[no_mangle]
-        pub fn memset(_: *mut libc::c_void, _: libc::c_int, _: libc::c_ulong) -> *mut libc::c_void;
-    }
-}
 #[header_src = "/usr/include/assert.h"]
 pub mod assert_h {
     extern "C" {
@@ -177,11 +142,9 @@ pub mod assert_h {
         ) -> !;
     }
 }
-#[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/bitstream.h"]
-pub mod bitstream_h {}
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/huf.h"]
 pub mod huf_h {
-    use super::mem_h::{BYTE, U32};
+    use ::converted::mem_common::{BYTE, U32};
     use super::stddef_h::size_t;
 }
 use self::_uint32_t_h::uint32_t;
@@ -195,9 +158,9 @@ use self::error_public_h::{
     FSE_error_workSpace_tooSmall,
 };
 use self::fse_h::{FSE_DTable, FSE_decompress_wksp};
-use self::mem_h::{unalign32, unnamed, BYTE, U32};
+use ::converted::mem_common::{unalign32, unnamed, BYTE, U32};
 use self::stddef_h::size_t;
-use self::string_h::{memcpy, memset};
+use ::converted::string_common::{memcpy, memset};
 unsafe extern "C" fn MEM_isLittleEndian() -> libc::c_uint {
     /* don't use static : performance detrimental  */
     let one: unnamed = unnamed { u: 1i32 as U32 };
@@ -568,8 +531,8 @@ pub unsafe extern "C" fn HUF_getErrorName(mut code: size_t) -> *const libc::c_ch
  * `huffWeight` is destination buffer.
  * @return : size read from `src` , or an error Code .
  *  Note : Needed by HUF_readCTable() and HUF_readDTableXn() . */
-#[no_mangle]
-pub unsafe extern "C" fn HUF_readStats(
+
+pub unsafe fn HUF_readStats(
     mut huffWeight: *mut BYTE,
     mut hwSize: size_t,
     mut rankStats: *mut U32,

@@ -1,12 +1,36 @@
-pub mod entropy_common;
-pub mod fseU16;
-pub mod fse_compress;
-pub mod fse_decompress;
-pub mod fuzzer;
-pub mod fuzzerHuff0;
-pub mod hist;
-pub mod huf_compress;
-pub mod huf_decompress;
-pub mod probaGenerator;
-pub mod xxhash;
-pub mod zlibh;
+mod entropy_common;
+mod fseU16;
+mod fse_compress;
+mod fse_decompress;
+mod fuzzer;
+mod fuzzerHuff0;
+mod hist;
+mod huf_compress;
+mod huf_common;
+mod huf_decompress;
+mod mem_common;
+mod probaGenerator;
+mod string_common;
+mod xxhash;
+mod types;
+mod zlibh;
+
+pub use self::entropy_common::*;
+pub use self::fseU16::*;
+pub use self::fse_compress::*;
+pub use self::fse_decompress::*;
+pub use self::fuzzer::*;
+pub use self::fuzzerHuff0::*;
+pub use self::hist::*;
+pub use self::huf_common::*;
+pub use self::huf_compress::*;
+pub use self::huf_decompress::*;
+pub use self::mem_common::*;
+pub use self::probaGenerator::*;
+pub use self::string_common::*;
+pub use self::types::*;
+pub use self::xxhash::*;
+pub use self::zlibh::*;
+
+// FIXME: Why do I need to export this manually?
+pub use self::entropy_common::HUF_readStats;

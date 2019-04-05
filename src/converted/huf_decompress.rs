@@ -1,3 +1,5 @@
+pub use self::huf_h::*;
+
 use libc;
 #[header_src = "/usr/include/i386/_types.h"]
 pub mod _types_h {
@@ -283,23 +285,6 @@ pub mod huf_h {
     pub type HUF_DTable = U32;
     use super::_size_t_h::size_t;
     use super::mem_h::{BYTE, U32};
-    extern "C" {
-        /* ! HUF_readStats() :
-         *  Read compact Huffman tree, saved by HUF_writeCTable().
-         * `huffWeight` is destination buffer.
-         * @return : size read from `src` , or an error Code .
-         *  Note : Needed by HUF_readCTable() and HUF_readDTableXn() . */
-        #[no_mangle]
-        pub fn HUF_readStats(
-            huffWeight: *mut BYTE,
-            hwSize: size_t,
-            rankStats: *mut U32,
-            nbSymbolsPtr: *mut U32,
-            tableLogPtr: *mut U32,
-            src: *const libc::c_void,
-            srcSize: size_t,
-        ) -> size_t;
-    }
 }
 #[header_src = "/usr/include/string.h"]
 pub mod string_h {
@@ -336,7 +321,8 @@ use self::huf_decompress_c::{
     algo_time_t, decompressionAlgo, rankValCol_t, sortedSymbol_t, unnamed_1, unnamed_2,
     DEBUG_static_assert, DEBUG_static_assert_0, DTableDesc, HUF_DEltX1, HUF_DEltX2,
 };
-use self::huf_h::{HUF_DTable, HUF_readStats};
+use self::HUF_DTable;
+use super::entropy_common::HUF_readStats;
 use self::mem_h::{unalign16, unalign32, unalign64, unnamed, BYTE, U16, U32, U64};
 use self::string_h::{memcpy, memset};
 /*-**************************************************************

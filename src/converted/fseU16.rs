@@ -181,86 +181,6 @@ pub mod fse_h {
     }
     use super::mem_h::{U16, U32};
     use super::stddef_h::{ptrdiff_t, size_t};
-    extern "C" {
-        #[no_mangle]
-        pub fn FSE_writeNCount(
-            buffer: *mut libc::c_void,
-            bufferSize: size_t,
-            normalizedCounter: *const libc::c_short,
-            maxSymbolValue: libc::c_uint,
-            tableLog: libc::c_uint,
-        ) -> size_t;
-        #[no_mangle]
-        pub fn FSE_normalizeCount(
-            normalizedCounter: *mut libc::c_short,
-            tableLog: libc::c_uint,
-            count: *const libc::c_uint,
-            srcSize: size_t,
-            maxSymbolValue: libc::c_uint,
-        ) -> size_t;
-        #[no_mangle]
-        pub fn FSE_optimalTableLog(
-            maxTableLog: libc::c_uint,
-            srcSize: size_t,
-            maxSymbolValue: libc::c_uint,
-        ) -> libc::c_uint;
-        /* !
-        Tutorial :
-        ----------
-        The first step is to count all symbols. FSE_count() does this job very fast.
-        Result will be saved into 'count', a table of unsigned int, which must be already allocated, and have 'maxSymbolValuePtr[0]+1' cells.
-        'src' is a table of bytes of size 'srcSize'. All values within 'src' MUST be <= maxSymbolValuePtr[0]
-        maxSymbolValuePtr[0] will be updated, with its real value (necessarily <= original value)
-        FSE_count() will return the number of occurrence of the most frequent symbol.
-        This can be used to know if there is a single symbol within 'src', and to quickly evaluate its compressibility.
-        If there is an error, the function will return an ErrorCode (which can be tested using FSE_isError()).
-
-        The next step is to normalize the frequencies.
-        FSE_normalizeCount() will ensure that sum of frequencies is == 2 ^'tableLog'.
-        It also guarantees a minimum of 1 to any Symbol with frequency >= 1.
-        You can use 'tableLog'==0 to mean "use default tableLog value".
-        If you are unsure of which tableLog value to use, you can ask FSE_optimalTableLog(),
-        which will provide the optimal valid tableLog given sourceSize, maxSymbolValue, and a user-defined maximum (0 means "default").
-
-        The result of FSE_normalizeCount() will be saved into a table,
-        called 'normalizedCounter', which is a table of signed short.
-        'normalizedCounter' must be already allocated, and have at least 'maxSymbolValue+1' cells.
-        The return value is tableLog if everything proceeded as expected.
-        It is 0 if there is a single symbol within distribution.
-        If there is an error (ex: invalid tableLog value), the function will return an ErrorCode (which can be tested using FSE_isError()).
-
-        'normalizedCounter' can be saved in a compact manner to a memory area using FSE_writeNCount().
-        'buffer' must be already allocated.
-        For guaranteed success, buffer size must be at least FSE_headerBound().
-        The result of the function is the number of bytes written into 'buffer'.
-        If there is an error, the function will return an ErrorCode (which can be tested using FSE_isError(); ex : buffer size too small).
-
-        'normalizedCounter' can then be used to create the compression table 'CTable'.
-        The space required by 'CTable' must be already allocated, using FSE_createCTable().
-        You can then use FSE_buildCTable() to fill 'CTable'.
-        If there is an error, both functions will return an ErrorCode (which can be tested using FSE_isError()).
-
-        'CTable' can then be used to compress 'src', with FSE_compress_usingCTable().
-        Similar to FSE_count(), the convention is that 'src' is assumed to be a table of char of size 'srcSize'
-        The function returns the size of compressed data (without header), necessarily <= `dstCapacity`.
-        If it returns '0', compressed data could not fit into 'dst'.
-        If there is an error, the function will return an ErrorCode (which can be tested using FSE_isError()).
-        */
-        /* *** DECOMPRESSION *** */
-        /* ! FSE_readNCount():
-        Read compactly saved 'normalizedCounter' from 'rBuffer'.
-        @return : size read from 'rBuffer',
-                  or an errorCode, which can be tested using FSE_isError().
-                  maxSymbolValuePtr[0] and tableLogPtr[0] will also be updated with their respective values */
-        #[no_mangle]
-        pub fn FSE_readNCount(
-            normalizedCounter: *mut libc::c_short,
-            maxSymbolValuePtr: *mut libc::c_uint,
-            tableLogPtr: *mut libc::c_uint,
-            rBuffer: *const libc::c_void,
-            rBuffSize: size_t,
-        ) -> size_t;
-    }
 }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/bitstream.h"]
 pub mod bitstream_h {
@@ -550,9 +470,11 @@ use self::error_public_h::{
     FSE_error_workSpace_tooSmall,
 };
 use self::fseU16_c::{DTable_max_t, FSE_decode_tU16};
+use super::entropy_common::FSE_readNCount;
+use super::fse_compress::{FSE_normalizeCount, FSE_optimalTableLog, FSE_writeNCount };
 use self::fse_h::{
-    FSE_CState_t, FSE_CTable, FSE_DState_t, FSE_DTable, FSE_DTableHeader, FSE_normalizeCount,
-    FSE_optimalTableLog, FSE_readNCount, FSE_symbolCompressionTransform, FSE_writeNCount,
+    FSE_CState_t, FSE_CTable, FSE_DState_t, FSE_DTable, FSE_DTableHeader,
+    FSE_symbolCompressionTransform,
 };
 use self::mem_h::{unalign16, unalign32, unalign64, unnamed, BYTE, S16, U16, U32, U64};
 use self::stddef_h::{ptrdiff_t, size_t};

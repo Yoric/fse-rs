@@ -1,3 +1,5 @@
+use super::huf_common as huf_h;
+
 use libc;
 #[header_src = "/usr/include/i386/_types.h"]
 pub mod _types_h {
@@ -28,46 +30,46 @@ pub mod _uint32_t_h {
 pub mod _uint64_t_h {
     pub type uint64_t = libc::c_ulonglong;
 }
-#[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/mem.h"]
-pub mod mem_h {
-    /*-**************************************************************
-    *  Basic Types
-    *****************************************************************/
-    /* C99 */
-    pub type BYTE = uint8_t;
-    pub type U16 = uint16_t;
-    pub type S16 = int16_t;
-    pub type U32 = uint32_t;
-    pub type U64 = uint64_t;
+#[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/huf_compress.c"]
+pub mod huf_compress_c {
     #[derive(Copy, Clone)]
     #[repr(C)]
-    pub union unnamed {
-        pub u: U32,
-        pub c: [BYTE; 4],
-    }
-    /* __pack instructions are safer, but compiler specific, hence potentially problematic for some compilers */
-    /* currently only defined for gcc and icc */
-    #[derive(Copy, Clone)]
-    #[repr(C, packed)]
-    pub struct unalign16 {
-        pub v: U16,
+    pub struct HUF_CElt_s {
+        pub val: U16,
+        pub nbBits: BYTE,
     }
     #[derive(Copy, Clone)]
-    #[repr(C, packed)]
-    pub struct unalign32 {
-        pub v: U32,
+    #[repr(C)]
+    pub struct HUF_compress_tables_t {
+        pub count: [U32; 256],
+        pub CTable: [HUF_CElt; 256],
+        pub nodeTable: huffNodeTable,
+    }
+    /* * HUF_buildCTable_wksp() :
+     *  Same as HUF_buildCTable(), but using externally allocated scratch buffer.
+     *  `workSpace` must be aligned on 4-bytes boundaries, and be at least as large as a table of HUF_CTABLE_WORKSPACE_SIZE_U32 unsigned.
+     */
+    pub type huffNodeTable = [nodeElt; 512];
+    pub type nodeElt = nodeElt_s;
+    #[derive(Copy, Clone)]
+    #[repr(C)]
+    pub struct nodeElt_s {
+        pub count: U32,
+        pub parent: U16,
+        pub byte: BYTE,
+        pub nbBits: BYTE,
     }
     #[derive(Copy, Clone)]
-    #[repr(C, packed)]
-    pub struct unalign64 {
-        pub v: U64,
+    #[repr(C)]
+    pub struct rankPos {
+        pub base: U32,
+        pub current: U32,
     }
-    use super::_int16_t_h::int16_t;
-    use super::_uint16_t_h::uint16_t;
-    use super::_uint32_t_h::uint32_t;
-    use super::_uint64_t_h::uint64_t;
-    use super::_uint8_t_h::uint8_t;
+    use super::_size_t_h::size_t;
+    use super::huf_h::HUF_CElt;
+    use super::super::mem_common::{BYTE, U16, U32};
 }
+
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/error_public.h"]
 pub mod error_public_h {
     /* ******************************************************************
@@ -321,90 +323,7 @@ pub mod fse_h {
         ) -> size_t;
     }
 }
-#[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/huf.h"]
-pub mod huf_h {
-    pub type HUF_repeat = libc::c_uint;
-    /* *< Can use the previous table and it is assumed to be valid */
-    pub const HUF_repeat_valid: HUF_repeat = 2;
-    /* *< Can use the previous table but it must be checked. Note : The previous table must have been constructed by HUF_compress{1, 4}X_repeat */
-    pub const HUF_repeat_check: HUF_repeat = 1;
-    /* *< Cannot use the previous table */
-    pub const HUF_repeat_none: HUF_repeat = 0;
-    /* incomplete type */
-    pub type HUF_CElt = HUF_CElt_s;
-    use super::_size_t_h::size_t;
-    use super::huf_compress_c::HUF_CElt_s;
-    use super::mem_h::{BYTE, U32};
-    extern "C" {
-        /* ! HUF_readStats() :
-         *  Read compact Huffman tree, saved by HUF_writeCTable().
-         * `huffWeight` is destination buffer.
-         * @return : size read from `src` , or an error Code .
-         *  Note : Needed by HUF_readCTable() and HUF_readDTableXn() . */
-        #[no_mangle]
-        pub fn HUF_readStats(
-            huffWeight: *mut BYTE,
-            hwSize: size_t,
-            rankStats: *mut U32,
-            nbSymbolsPtr: *mut U32,
-            tableLogPtr: *mut U32,
-            src: *const libc::c_void,
-            srcSize: size_t,
-        ) -> size_t;
-    }
-}
-#[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/huf_compress.c"]
-pub mod huf_compress_c {
-    #[derive(Copy, Clone)]
-    #[repr(C)]
-    pub struct HUF_CElt_s {
-        pub val: U16,
-        pub nbBits: BYTE,
-    }
-    #[derive(Copy, Clone)]
-    #[repr(C)]
-    pub struct HUF_compress_tables_t {
-        pub count: [U32; 256],
-        pub CTable: [HUF_CElt; 256],
-        pub nodeTable: huffNodeTable,
-    }
-    /* * HUF_buildCTable_wksp() :
-     *  Same as HUF_buildCTable(), but using externally allocated scratch buffer.
-     *  `workSpace` must be aligned on 4-bytes boundaries, and be at least as large as a table of HUF_CTABLE_WORKSPACE_SIZE_U32 unsigned.
-     */
-    pub type huffNodeTable = [nodeElt; 512];
-    pub type nodeElt = nodeElt_s;
-    #[derive(Copy, Clone)]
-    #[repr(C)]
-    pub struct nodeElt_s {
-        pub count: U32,
-        pub parent: U16,
-        pub byte: BYTE,
-        pub nbBits: BYTE,
-    }
-    #[derive(Copy, Clone)]
-    #[repr(C)]
-    pub struct rankPos {
-        pub base: U32,
-        pub current: U32,
-    }
-    use super::_size_t_h::size_t;
-    use super::huf_h::HUF_CElt;
-    use super::mem_h::{BYTE, U16, U32};
-}
-#[header_src = "/usr/include/string.h"]
-pub mod string_h {
-    extern "C" {
-        #[no_mangle]
-        pub fn memcpy(
-            _: *mut libc::c_void,
-            _: *const libc::c_void,
-            _: libc::c_ulong,
-        ) -> *mut libc::c_void;
-        #[no_mangle]
-        pub fn memset(_: *mut libc::c_void, _: libc::c_int, _: libc::c_ulong) -> *mut libc::c_void;
-    }
-}
+
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/error_private.h"]
 pub mod error_private_h {}
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/hist.h"]
@@ -467,8 +386,8 @@ use self::huf_compress_c::{
 use self::huf_h::{
     HUF_CElt, HUF_readStats, HUF_repeat, HUF_repeat_check, HUF_repeat_none, HUF_repeat_valid,
 };
-use self::mem_h::{unalign16, unalign32, unalign64, unnamed, BYTE, S16, U16, U32, U64};
-use self::string_h::{memcpy, memset};
+use super::mem_common::{unalign16, unalign32, unalign64, unnamed, BYTE, S16, U16, U32, U64};
+use super::string_common::{memcpy, memset};
 /*-**************************************************************
 *  Memory I/O
 *****************************************************************/
@@ -1852,13 +1771,13 @@ pub unsafe extern "C" fn HUF_readCTable(
     /* get symbol weights */
     let readSize: size_t = HUF_readStats(
         huffWeight.as_mut_ptr(),
-        (255i32 + 1i32) as size_t,
+        (255i32 + 1i32) as usize,
         rankVal.as_mut_ptr(),
         &mut nbSymbols,
         &mut tableLog,
         src,
-        srcSize,
-    );
+        srcSize as usize,
+    ) as u64;
     if 0 != ERR_isError(readSize) {
         return readSize;
     }
