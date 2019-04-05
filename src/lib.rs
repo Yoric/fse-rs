@@ -4,15 +4,13 @@
 #![feature(ptr_wrapping_offset_from)]
 #![feature(label_break_value)]
 #![feature(const_raw_ptr_to_usize_cast)]
-
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![allow(dead_code)]
 #![allow(mutable_transmutes)]
-#![allow(unused_mut)]#![feature(custom_attribute)]
-
-
+#![allow(unused_mut)]
+#![feature(custom_attribute)]
 
 #[macro_use]
 extern crate c2rust_bitfields;

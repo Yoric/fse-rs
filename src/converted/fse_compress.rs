@@ -10,7 +10,7 @@ pub mod _int16_t_h {
 #[header_src = "/usr/include/sys/_types/_size_t.h"]
 pub mod _size_t_h {
     pub type size_t = __darwin_size_t;
-    use super::_types_h::{__darwin_size_t};
+    use super::_types_h::__darwin_size_t;
 }
 #[header_src = "/usr/include/_types/_uint8_t.h"]
 pub mod _uint8_t_h {
@@ -28,95 +28,88 @@ pub mod _uint32_t_h {
 pub mod _uint64_t_h {
     pub type uint64_t = libc::c_ulonglong;
 }
-#[header_src =
-      "/usr/local/Cellar/llvm/7.0.1/lib/clang/7.0.1/include/stddef.h"]
+#[header_src = "/usr/local/Cellar/llvm/7.0.1/lib/clang/7.0.1/include/stddef.h"]
 pub mod stddef_h {
     pub type ptrdiff_t = libc::c_long;
 }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/mem.h"]
 pub mod mem_h {
     /*-**************************************************************
-*  Basic Types
-*****************************************************************/
+    *  Basic Types
+    *****************************************************************/
     /* C99 */
     pub type BYTE = uint8_t;
     pub type U16 = uint16_t;
     pub type S16 = int16_t;
     pub type U32 = uint32_t;
     pub type U64 = uint64_t;
-    #[derive
-    ( Copy , Clone )]
-    #[repr
-    ( C )]
+    #[derive(Copy, Clone)]
+    #[repr(C)]
     pub union unnamed {
         pub u: U32,
         pub c: [BYTE; 4],
     }
     /* __pack instructions are safer, but compiler specific, hence potentially problematic for some compilers */
-/* currently only defined for gcc and icc */
-    #[derive
-    ( Copy , Clone )]
+    /* currently only defined for gcc and icc */
+    #[derive(Copy, Clone)]
     #[repr(C, packed)]
     pub struct unalign16 {
         pub v: U16,
     }
-    #[derive
-    ( Copy , Clone )]
+    #[derive(Copy, Clone)]
     #[repr(C, packed)]
     pub struct unalign32 {
         pub v: U32,
     }
-    #[derive
-    ( Copy , Clone )]
+    #[derive(Copy, Clone)]
     #[repr(C, packed)]
     pub struct unalign64 {
         pub v: U64,
     }
-    use super::_uint8_t_h::{uint8_t};
-    use super::_uint16_t_h::{uint16_t};
-    use super::_int16_t_h::{int16_t};
-    use super::_uint32_t_h::{uint32_t};
-    use super::_uint64_t_h::{uint64_t};
+    use super::_int16_t_h::int16_t;
+    use super::_uint16_t_h::uint16_t;
+    use super::_uint32_t_h::uint32_t;
+    use super::_uint64_t_h::uint64_t;
+    use super::_uint8_t_h::uint8_t;
 }
-#[header_src =
-      "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/error_public.h"]
+#[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/error_public.h"]
 pub mod error_public_h {
     /* ******************************************************************
-   Error codes list
-   Copyright (C) 2016, Yann Collet
+       Error codes list
+       Copyright (C) 2016, Yann Collet
 
-   BSD 2-Clause License (http://www.opensource.org/licenses/bsd-license.php)
+       BSD 2-Clause License (http://www.opensource.org/licenses/bsd-license.php)
 
-   Redistribution and use in source and binary forms, with or without
-   modification, are permitted provided that the following conditions are
-   met:
+       Redistribution and use in source and binary forms, with or without
+       modification, are permitted provided that the following conditions are
+       met:
 
-       * Redistributions of source code must retain the above copyright
-   notice, this list of conditions and the following disclaimer.
-       * Redistributions in binary form must reproduce the above
-   copyright notice, this list of conditions and the following disclaimer
-   in the documentation and/or other materials provided with the
-   distribution.
+           * Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+           * Redistributions in binary form must reproduce the above
+       copyright notice, this list of conditions and the following disclaimer
+       in the documentation and/or other materials provided with the
+       distribution.
 
-   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-   A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-   OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-   LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-   DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-   THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+       THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+       "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+       LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+       A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+       OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+       SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+       LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+       DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+       THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+       (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+       OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-   You can contact the author at :
-   - Source repository : https://github.com/Cyan4973/FiniteStateEntropy
-   - Public forum : https://groups.google.com/forum/#!forum/lz4c
-****************************************************************** */
+       You can contact the author at :
+       - Source repository : https://github.com/Cyan4973/FiniteStateEntropy
+       - Public forum : https://groups.google.com/forum/#!forum/lz4c
+    ****************************************************************** */
     /* *****************************************
- *  error codes list
- ******************************************/
+     *  error codes list
+     ******************************************/
     pub type unnamed_0 = libc::c_uint;
     pub const FSE_error_maxCode: unnamed_0 = 9;
     pub const FSE_error_workSpace_tooSmall: unnamed_0 = 8;
@@ -129,64 +122,62 @@ pub mod error_public_h {
     pub const FSE_error_GENERIC: unnamed_0 = 1;
     pub const FSE_error_no_error: unnamed_0 = 0;
 }
-#[header_src =
-      "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/bitstream.h"]
+#[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/bitstream.h"]
 pub mod bitstream_h {
     /* ******************************************************************
-   bitstream
-   Part of FSE library
-   Copyright (C) 2013-present, Yann Collet.
+       bitstream
+       Part of FSE library
+       Copyright (C) 2013-present, Yann Collet.
 
-   BSD 2-Clause License (http://www.opensource.org/licenses/bsd-license.php)
+       BSD 2-Clause License (http://www.opensource.org/licenses/bsd-license.php)
 
-   Redistribution and use in source and binary forms, with or without
-   modification, are permitted provided that the following conditions are
-   met:
+       Redistribution and use in source and binary forms, with or without
+       modification, are permitted provided that the following conditions are
+       met:
 
-       * Redistributions of source code must retain the above copyright
-   notice, this list of conditions and the following disclaimer.
-       * Redistributions in binary form must reproduce the above
-   copyright notice, this list of conditions and the following disclaimer
-   in the documentation and/or other materials provided with the
-   distribution.
+           * Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
+           * Redistributions in binary form must reproduce the above
+       copyright notice, this list of conditions and the following disclaimer
+       in the documentation and/or other materials provided with the
+       distribution.
 
-   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-   A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-   OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-   SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-   LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-   DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-   THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+       THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+       "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+       LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+       A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+       OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+       SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+       LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+       DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+       THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+       (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+       OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-   You can contact the author at :
-   - Source repository : https://github.com/Cyan4973/FiniteStateEntropy
-****************************************************************** */
+       You can contact the author at :
+       - Source repository : https://github.com/Cyan4973/FiniteStateEntropy
+    ****************************************************************** */
     /*
-*  This API consists of small unitary functions, which must be inlined for best performance.
-*  Since link-time-optimization is not available for all compilers,
-*  these functions are defined into a .h to be included.
-*/
+    *  This API consists of small unitary functions, which must be inlined for best performance.
+    *  Since link-time-optimization is not available for all compilers,
+    *  these functions are defined into a .h to be included.
+    */
     /*-****************************************
-*  Dependencies
-******************************************/
+    *  Dependencies
+    ******************************************/
     /* unaligned access routines */
     /* assert(), DEBUGLOG(), RAWLOG() */
     /*=========================================
-*  Target specific
-=========================================*/
+    *  Target specific
+    =========================================*/
     /*-******************************************
-*  bitStream encoding API (write forward)
-********************************************/
-/* bitStream can mix input from multiple sources.
- * A critical property of these streams is that they encode and decode in **reverse** direction.
- * So the first bit sequence you add will be the last to be read, like a LIFO stack.
- */
-    #[derive
-    ( Copy , Clone )]
+    *  bitStream encoding API (write forward)
+    ********************************************/
+    /* bitStream can mix input from multiple sources.
+     * A critical property of these streams is that they encode and decode in **reverse** direction.
+     * So the first bit sequence you add will be the last to be read, like a LIFO stack.
+     */
+    #[derive(Copy, Clone)]
     #[repr(C)]
     pub struct BIT_CStream_t {
         pub bitContainer: size_t,
@@ -197,13 +188,11 @@ pub mod bitstream_h {
     }
     pub type unnamed_1 = libc::c_uint;
     pub const MEM_static_assert: unnamed_1 = 1;
-    use super::_size_t_h::{size_t};
+    use super::_size_t_h::size_t;
 }
-#[header_src =
-      "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/fse_compress.c"]
+#[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/fse_compress.c"]
 pub mod fse_compress_c {
-    #[derive
-    ( Copy , Clone )]
+    #[derive(Copy, Clone)]
     #[repr(C)]
     pub struct fseWkspMax_t {
         pub CTable_max: [FSE_CTable; 2561],
@@ -212,9 +201,9 @@ pub mod fse_compress_c {
     pub type unnamed_2 = libc::c_uint;
     /* compilation failures here means scratchBuffer is not large enough */
     pub const DEBUG_static_assert: unnamed_2 = 1;
-    use super::fse_h::{FSE_CTable};
-    use super::mem_h::{BYTE};
-    use super::_size_t_h::{size_t};
+    use super::_size_t_h::size_t;
+    use super::fse_h::FSE_CTable;
+    use super::mem_h::BYTE;
 }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/fse.h"]
 pub mod fse_h {
@@ -223,14 +212,13 @@ pub mod fse_h {
     /* don't allocate that. It's only meant to be more restrictive than void* */
     pub type FSE_CTable = libc::c_uint;
     /* *****************************************
-*  FSE symbol compression API
-*******************************************/
-/*
-   This API consists of small unitary functions, which highly benefit from being inlined.
-   Hence their body are included in next section.
-*/
-    #[derive
-    ( Copy , Clone )]
+    *  FSE symbol compression API
+    *******************************************/
+    /*
+       This API consists of small unitary functions, which highly benefit from being inlined.
+       Hence their body are included in next section.
+    */
+    #[derive(Copy, Clone)]
     #[repr(C)]
     pub struct FSE_CState_t {
         pub value: ptrdiff_t,
@@ -240,18 +228,17 @@ pub mod fse_h {
     }
     /* faster, but works only if nbBits is always >= 1 (otherwise, result will be corrupted) */
     /* *****************************************
-*  Implementation of inlined functions
-*******************************************/
-    #[derive
-    ( Copy , Clone )]
+    *  Implementation of inlined functions
+    *******************************************/
+    #[derive(Copy, Clone)]
     #[repr(C)]
     pub struct FSE_symbolCompressionTransform {
         pub deltaFindState: libc::c_int,
         pub deltaNbBits: U32,
     }
-    use super::stddef_h::{ptrdiff_t};
-    use super::mem_h::{U32};
-    use super::_size_t_h::{size_t};
+    use super::_size_t_h::size_t;
+    use super::mem_h::U32;
+    use super::stddef_h::ptrdiff_t;
 }
 #[header_src = "/usr/include/malloc/_malloc.h"]
 pub mod _malloc_h {
@@ -264,48 +251,46 @@ pub mod _malloc_h {
 }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/hist.h"]
 pub mod hist_h {
-    use super::_size_t_h::{size_t};
+    use super::_size_t_h::size_t;
     extern "C" {
         /* --- advanced histogram functions --- */
         /* * HIST_count_wksp() :
- *  Same as HIST_count(), but using an externally provided scratch buffer.
- *  Benefit is this function will use very little stack space.
- * `workSpace` must be a table of unsigned of size >= HIST_WKSP_SIZE_U32
- */
+         *  Same as HIST_count(), but using an externally provided scratch buffer.
+         *  Benefit is this function will use very little stack space.
+         * `workSpace` must be a table of unsigned of size >= HIST_WKSP_SIZE_U32
+         */
         #[no_mangle]
-        pub fn HIST_count_wksp(count: *mut libc::c_uint,
-                               maxSymbolValuePtr: *mut libc::c_uint,
-                               src: *const libc::c_void, srcSize: size_t,
-                               workSpace: *mut libc::c_uint) -> size_t;
+        pub fn HIST_count_wksp(
+            count: *mut libc::c_uint,
+            maxSymbolValuePtr: *mut libc::c_uint,
+            src: *const libc::c_void,
+            srcSize: size_t,
+            workSpace: *mut libc::c_uint,
+        ) -> size_t;
     }
 }
-#[header_src =
-      "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/error_private.h"]
-pub mod error_private_h { }
-use self::_types_h::{__darwin_size_t};
-use self::_int16_t_h::{int16_t};
-use self::_size_t_h::{size_t};
-use self::_uint8_t_h::{uint8_t};
-use self::_uint16_t_h::{uint16_t};
-use self::_uint32_t_h::{uint32_t};
-use self::_uint64_t_h::{uint64_t};
-use self::stddef_h::{ptrdiff_t};
-use self::mem_h::{BYTE, U16, S16, U32, U64, unnamed, unalign16, unalign32,
-                  unalign64};
-use self::error_public_h::{unnamed_0, FSE_error_maxCode,
-                           FSE_error_workSpace_tooSmall,
-                           FSE_error_maxSymbolValue_tooSmall,
-                           FSE_error_maxSymbolValue_tooLarge,
-                           FSE_error_tableLog_tooLarge,
-                           FSE_error_corruption_detected,
-                           FSE_error_srcSize_wrong,
-                           FSE_error_dstSize_tooSmall, FSE_error_GENERIC,
-                           FSE_error_no_error};
-use self::bitstream_h::{BIT_CStream_t, unnamed_1, MEM_static_assert};
+#[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/error_private.h"]
+pub mod error_private_h {}
+use self::_int16_t_h::int16_t;
+use self::_malloc_h::{free, malloc};
+use self::_size_t_h::size_t;
+use self::_types_h::__darwin_size_t;
+use self::_uint16_t_h::uint16_t;
+use self::_uint32_t_h::uint32_t;
+use self::_uint64_t_h::uint64_t;
+use self::_uint8_t_h::uint8_t;
+use self::bitstream_h::{unnamed_1, BIT_CStream_t, MEM_static_assert};
+use self::error_public_h::{
+    unnamed_0, FSE_error_GENERIC, FSE_error_corruption_detected, FSE_error_dstSize_tooSmall,
+    FSE_error_maxCode, FSE_error_maxSymbolValue_tooLarge, FSE_error_maxSymbolValue_tooSmall,
+    FSE_error_no_error, FSE_error_srcSize_wrong, FSE_error_tableLog_tooLarge,
+    FSE_error_workSpace_tooSmall,
+};
 use self::fse_compress_c::{fseWkspMax_t, unnamed_2, DEBUG_static_assert};
-use self::fse_h::{FSE_CTable, FSE_CState_t, FSE_symbolCompressionTransform};
-use self::_malloc_h::{malloc, free};
-use self::hist_h::{HIST_count_wksp};
+use self::fse_h::{FSE_CState_t, FSE_CTable, FSE_symbolCompressionTransform};
+use self::hist_h::HIST_count_wksp;
+use self::mem_h::{unalign16, unalign32, unalign64, unnamed, BYTE, S16, U16, U32, U64};
+use self::stddef_h::ptrdiff_t;
 /*-**************************************************************
 *  Memory I/O
 *****************************************************************/
@@ -324,125 +309,148 @@ use self::hist_h::{HIST_count_wksp};
  */
 /* can be defined externally, on command line for example */
 unsafe extern "C" fn MEM_32bits() -> libc::c_uint {
-    return (::std::mem::size_of::<size_t>() as libc::c_ulong ==
-                4i32 as libc::c_ulong) as libc::c_int as libc::c_uint;
+    return (::std::mem::size_of::<size_t>() as libc::c_ulong == 4i32 as libc::c_ulong)
+        as libc::c_int as libc::c_uint;
 }
 unsafe extern "C" fn MEM_isLittleEndian() -> libc::c_uint {
     /* don't use static : performance detrimental  */
-    let one: unnamed = unnamed{u: 1i32 as U32,};
+    let one: unnamed = unnamed { u: 1i32 as U32 };
     return one.c[0usize] as libc::c_uint;
 }
 unsafe extern "C" fn MEM_read16(mut ptr: *const libc::c_void) -> U16 {
     return (*(ptr as *const unalign16)).v;
 }
-unsafe extern "C" fn MEM_write32(mut memPtr: *mut libc::c_void,
-                                 mut value: U32) {
+unsafe extern "C" fn MEM_write32(mut memPtr: *mut libc::c_void, mut value: U32) {
     (*(memPtr as *mut unalign32)).v = value;
 }
-unsafe extern "C" fn MEM_write64(mut memPtr: *mut libc::c_void,
-                                 mut value: U64) {
+unsafe extern "C" fn MEM_write64(mut memPtr: *mut libc::c_void, mut value: U64) {
     (*(memPtr as *mut unalign64)).v = value;
 }
 /* MEM_FORCE_MEMORY_ACCESS */
 unsafe extern "C" fn MEM_swap32(mut in_0: U32) -> U32 {
-    return in_0 << 24i32 & 0xff000000u32 |
-               in_0 << 8i32 & 0xff0000i32 as libc::c_uint |
-               in_0 >> 8i32 & 0xff00i32 as libc::c_uint |
-               in_0 >> 24i32 & 0xffi32 as libc::c_uint;
+    return in_0 << 24i32 & 0xff000000u32
+        | in_0 << 8i32 & 0xff0000i32 as libc::c_uint
+        | in_0 >> 8i32 & 0xff00i32 as libc::c_uint
+        | in_0 >> 24i32 & 0xffi32 as libc::c_uint;
 }
 unsafe extern "C" fn MEM_swap64(mut in_0: U64) -> U64 {
-    return in_0 << 56i32 & 0xff00000000000000u64 |
-               in_0 << 40i32 & 0xff000000000000u64 |
-               in_0 << 24i32 & 0xff0000000000u64 |
-               in_0 << 8i32 & 0xff00000000u64 | in_0 >> 8i32 & 0xff000000u64 |
-               in_0 >> 24i32 & 0xff0000u64 | in_0 >> 40i32 & 0xff00u64 |
-               in_0 >> 56i32 & 0xffu64;
+    return in_0 << 56i32 & 0xff00000000000000u64
+        | in_0 << 40i32 & 0xff000000000000u64
+        | in_0 << 24i32 & 0xff0000000000u64
+        | in_0 << 8i32 & 0xff00000000u64
+        | in_0 >> 8i32 & 0xff000000u64
+        | in_0 >> 24i32 & 0xff0000u64
+        | in_0 >> 40i32 & 0xff00u64
+        | in_0 >> 56i32 & 0xffu64;
 }
-unsafe extern "C" fn MEM_writeLE32(mut memPtr: *mut libc::c_void,
-                                   mut val32: U32) {
+unsafe extern "C" fn MEM_writeLE32(mut memPtr: *mut libc::c_void, mut val32: U32) {
     if 0 != MEM_isLittleEndian() {
         MEM_write32(memPtr, val32);
-    } else { MEM_write32(memPtr, MEM_swap32(val32)); };
+    } else {
+        MEM_write32(memPtr, MEM_swap32(val32));
+    };
 }
-unsafe extern "C" fn MEM_writeLE64(mut memPtr: *mut libc::c_void,
-                                   mut val64: U64) {
+unsafe extern "C" fn MEM_writeLE64(mut memPtr: *mut libc::c_void, mut val64: U64) {
     if 0 != MEM_isLittleEndian() {
         MEM_write64(memPtr, val64);
-    } else { MEM_write64(memPtr, MEM_swap64(val64)); };
+    } else {
+        MEM_write64(memPtr, MEM_swap64(val64));
+    };
 }
-unsafe extern "C" fn MEM_writeLEST(mut memPtr: *mut libc::c_void,
-                                   mut val: size_t) {
+unsafe extern "C" fn MEM_writeLEST(mut memPtr: *mut libc::c_void, mut val: size_t) {
     if 0 != MEM_32bits() {
         MEM_writeLE32(memPtr, val as U32);
-    } else { MEM_writeLE64(memPtr, val as U64); };
+    } else {
+        MEM_writeLE64(memPtr, val as U64);
+    };
 }
 /*-****************************************
 *  Error codes handling
 ******************************************/
 unsafe extern "C" fn ERR_isError(mut code: size_t) -> libc::c_uint {
-    return (code > -(FSE_error_maxCode as libc::c_int) as size_t) as
-               libc::c_int as libc::c_uint;
+    return (code > -(FSE_error_maxCode as libc::c_int) as size_t) as libc::c_int as libc::c_uint;
 }
-unsafe extern "C" fn BIT_initCStream(mut bitC: *mut BIT_CStream_t,
-                                     mut startPtr: *mut libc::c_void,
-                                     mut dstCapacity: size_t) -> size_t {
+unsafe extern "C" fn BIT_initCStream(
+    mut bitC: *mut BIT_CStream_t,
+    mut startPtr: *mut libc::c_void,
+    mut dstCapacity: size_t,
+) -> size_t {
     (*bitC).bitContainer = 0i32 as size_t;
     (*bitC).bitPos = 0i32 as libc::c_uint;
     (*bitC).startPtr = startPtr as *mut libc::c_char;
     (*bitC).ptr = (*bitC).startPtr;
-    (*bitC).endPtr =
-        (*bitC).startPtr.offset(dstCapacity as
-                                    isize).offset(-(::std::mem::size_of::<size_t>()
-                                                        as libc::c_ulong as
-                                                        isize));
+    (*bitC).endPtr = (*bitC)
+        .startPtr
+        .offset(dstCapacity as isize)
+        .offset(-(::std::mem::size_of::<size_t>() as libc::c_ulong as isize));
     if dstCapacity <= ::std::mem::size_of::<size_t>() as libc::c_ulong {
-        return -(FSE_error_dstSize_tooSmall as libc::c_int) as size_t
+        return -(FSE_error_dstSize_tooSmall as libc::c_int) as size_t;
     }
     return 0i32 as size_t;
 }
-unsafe extern "C" fn BIT_addBits(mut bitC: *mut BIT_CStream_t,
-                                 mut value: size_t,
-                                 mut nbBits: libc::c_uint) {
-    (*bitC).bitContainer |=
-        (value & BIT_mask[nbBits as usize] as libc::c_ulong) <<
-            (*bitC).bitPos;
+unsafe extern "C" fn BIT_addBits(
+    mut bitC: *mut BIT_CStream_t,
+    mut value: size_t,
+    mut nbBits: libc::c_uint,
+) {
+    (*bitC).bitContainer |= (value & BIT_mask[nbBits as usize] as libc::c_ulong) << (*bitC).bitPos;
     (*bitC).bitPos = (*bitC).bitPos.wrapping_add(nbBits);
 }
 /* Software version */
 /*=====    Local Constants   =====*/
-static mut BIT_mask: [libc::c_uint; 32] =
-    [0i32 as libc::c_uint, 1i32 as libc::c_uint, 3i32 as libc::c_uint,
-     7i32 as libc::c_uint, 0xfi32 as libc::c_uint, 0x1fi32 as libc::c_uint,
-     0x3fi32 as libc::c_uint, 0x7fi32 as libc::c_uint,
-     0xffi32 as libc::c_uint, 0x1ffi32 as libc::c_uint,
-     0x3ffi32 as libc::c_uint, 0x7ffi32 as libc::c_uint,
-     0xfffi32 as libc::c_uint, 0x1fffi32 as libc::c_uint,
-     0x3fffi32 as libc::c_uint, 0x7fffi32 as libc::c_uint,
-     0xffffi32 as libc::c_uint, 0x1ffffi32 as libc::c_uint,
-     0x3ffffi32 as libc::c_uint, 0x7ffffi32 as libc::c_uint,
-     0xfffffi32 as libc::c_uint, 0x1fffffi32 as libc::c_uint,
-     0x3fffffi32 as libc::c_uint, 0x7fffffi32 as libc::c_uint,
-     0xffffffi32 as libc::c_uint, 0x1ffffffi32 as libc::c_uint,
-     0x3ffffffi32 as libc::c_uint, 0x7ffffffi32 as libc::c_uint,
-     0xfffffffi32 as libc::c_uint, 0x1fffffffi32 as libc::c_uint,
-     0x3fffffffi32 as libc::c_uint, 0x7fffffffi32 as libc::c_uint];
+static mut BIT_mask: [libc::c_uint; 32] = [
+    0i32 as libc::c_uint,
+    1i32 as libc::c_uint,
+    3i32 as libc::c_uint,
+    7i32 as libc::c_uint,
+    0xfi32 as libc::c_uint,
+    0x1fi32 as libc::c_uint,
+    0x3fi32 as libc::c_uint,
+    0x7fi32 as libc::c_uint,
+    0xffi32 as libc::c_uint,
+    0x1ffi32 as libc::c_uint,
+    0x3ffi32 as libc::c_uint,
+    0x7ffi32 as libc::c_uint,
+    0xfffi32 as libc::c_uint,
+    0x1fffi32 as libc::c_uint,
+    0x3fffi32 as libc::c_uint,
+    0x7fffi32 as libc::c_uint,
+    0xffffi32 as libc::c_uint,
+    0x1ffffi32 as libc::c_uint,
+    0x3ffffi32 as libc::c_uint,
+    0x7ffffi32 as libc::c_uint,
+    0xfffffi32 as libc::c_uint,
+    0x1fffffi32 as libc::c_uint,
+    0x3fffffi32 as libc::c_uint,
+    0x7fffffi32 as libc::c_uint,
+    0xffffffi32 as libc::c_uint,
+    0x1ffffffi32 as libc::c_uint,
+    0x3ffffffi32 as libc::c_uint,
+    0x7ffffffi32 as libc::c_uint,
+    0xfffffffi32 as libc::c_uint,
+    0x1fffffffi32 as libc::c_uint,
+    0x3fffffffi32 as libc::c_uint,
+    0x7fffffffi32 as libc::c_uint,
+];
 unsafe extern "C" fn BIT_flushBits(mut bitC: *mut BIT_CStream_t) {
     let nbBytes: size_t = ((*bitC).bitPos >> 3i32) as size_t;
     MEM_writeLEST((*bitC).ptr as *mut libc::c_void, (*bitC).bitContainer);
     (*bitC).ptr = (*bitC).ptr.offset(nbBytes as isize);
-    if (*bitC).ptr > (*bitC).endPtr { (*bitC).ptr = (*bitC).endPtr }
+    if (*bitC).ptr > (*bitC).endPtr {
+        (*bitC).ptr = (*bitC).endPtr
+    }
     (*bitC).bitPos &= 7i32 as libc::c_uint;
     (*bitC).bitContainer >>= nbBytes.wrapping_mul(8i32 as libc::c_ulong);
 }
-unsafe extern "C" fn BIT_closeCStream(mut bitC: *mut BIT_CStream_t)
- -> size_t {
+unsafe extern "C" fn BIT_closeCStream(mut bitC: *mut BIT_CStream_t) -> size_t {
     BIT_addBitsFast(bitC, 1i32 as size_t, 1i32 as libc::c_uint);
     BIT_flushBits(bitC);
-    if (*bitC).ptr >= (*bitC).endPtr { return 0i32 as size_t }
+    if (*bitC).ptr >= (*bitC).endPtr {
+        return 0i32 as size_t;
+    }
     return ((*bitC).ptr.wrapping_offset_from((*bitC).startPtr) as libc::c_long
-                +
-                ((*bitC).bitPos > 0i32 as libc::c_uint) as libc::c_int as
-                    libc::c_long) as size_t;
+        + ((*bitC).bitPos > 0i32 as libc::c_uint) as libc::c_int as libc::c_long)
+        as size_t;
 }
 /* Start by invoking BIT_initDStream().
 *  A chunk of the bitStream is then stored into a local register.
@@ -456,9 +464,11 @@ unsafe extern "C" fn BIT_closeCStream(mut bitC: *mut BIT_CStream_t)
 /*-****************************************
 *  unsafe API
 ******************************************/
-unsafe extern "C" fn BIT_addBitsFast(mut bitC: *mut BIT_CStream_t,
-                                     mut value: size_t,
-                                     mut nbBits: libc::c_uint) {
+unsafe extern "C" fn BIT_addBitsFast(
+    mut bitC: *mut BIT_CStream_t,
+    mut value: size_t,
+    mut nbBits: libc::c_uint,
+) {
     (*bitC).bitContainer |= value << (*bitC).bitPos;
     (*bitC).bitPos = (*bitC).bitPos.wrapping_add(nbBits);
 }
@@ -489,13 +499,20 @@ unsafe extern "C" fn BIT_flushBitsFast(mut bitC: *mut BIT_CStream_t) {
                      if FSE_isError(return), compression failed (more details using FSE_getErrorName())
 */
 #[no_mangle]
-pub unsafe extern "C" fn FSE_compress(mut dst: *mut libc::c_void,
-                                      mut dstCapacity: size_t,
-                                      mut src: *const libc::c_void,
-                                      mut srcSize: size_t) -> size_t {
-    return FSE_compress2(dst, dstCapacity, src, srcSize,
-                         255i32 as libc::c_uint,
-                         (13i32 - 2i32) as libc::c_uint);
+pub unsafe extern "C" fn FSE_compress(
+    mut dst: *mut libc::c_void,
+    mut dstCapacity: size_t,
+    mut src: *const libc::c_void,
+    mut srcSize: size_t,
+) -> size_t {
+    return FSE_compress2(
+        dst,
+        dstCapacity,
+        src,
+        srcSize,
+        255i32 as libc::c_uint,
+        (13i32 - 2i32) as libc::c_uint,
+    );
 }
 /*-*****************************************
 *  FSE advanced functions
@@ -509,23 +526,31 @@ pub unsafe extern "C" fn FSE_compress(mut dst: *mut libc::c_void,
                      if FSE_isError(return), it's an error code.
 */
 #[no_mangle]
-pub unsafe extern "C" fn FSE_compress2(mut dst: *mut libc::c_void,
-                                       mut dstCapacity: size_t,
-                                       mut src: *const libc::c_void,
-                                       mut srcSize: size_t,
-                                       mut maxSymbolValue: libc::c_uint,
-                                       mut tableLog: libc::c_uint) -> size_t {
-    let mut scratchBuffer: fseWkspMax_t =
-        fseWkspMax_t{CTable_max: [0; 2561], scratchBuffer: [0; 4096],};
+pub unsafe extern "C" fn FSE_compress2(
+    mut dst: *mut libc::c_void,
+    mut dstCapacity: size_t,
+    mut src: *const libc::c_void,
+    mut srcSize: size_t,
+    mut maxSymbolValue: libc::c_uint,
+    mut tableLog: libc::c_uint,
+) -> size_t {
+    let mut scratchBuffer: fseWkspMax_t = fseWkspMax_t {
+        CTable_max: [0; 2561],
+        scratchBuffer: [0; 4096],
+    };
     if tableLog > (14i32 - 2i32) as libc::c_uint {
-        return -(FSE_error_tableLog_tooLarge as libc::c_int) as size_t
+        return -(FSE_error_tableLog_tooLarge as libc::c_int) as size_t;
     }
-    return FSE_compress_wksp(dst, dstCapacity, src, srcSize, maxSymbolValue,
-                             tableLog,
-                             &mut scratchBuffer as *mut fseWkspMax_t as
-                                 *mut libc::c_void,
-                             ::std::mem::size_of::<fseWkspMax_t>() as
-                                 libc::c_ulong);
+    return FSE_compress_wksp(
+        dst,
+        dstCapacity,
+        src,
+        srcSize,
+        maxSymbolValue,
+        tableLog,
+        &mut scratchBuffer as *mut fseWkspMax_t as *mut libc::c_void,
+        ::std::mem::size_of::<fseWkspMax_t>() as libc::c_ulong,
+    );
 }
 /* *< same as FSE_optimalTableLog(), which used `minus==2` */
 /* FSE_compress_wksp() :
@@ -533,151 +558,205 @@ pub unsafe extern "C" fn FSE_compress2(mut dst: *mut libc::c_void,
  * FSE_WKSP_SIZE_U32() provides the minimum size required for `workSpace` as a table of FSE_CTable.
  */
 #[no_mangle]
-pub unsafe extern "C" fn FSE_compress_wksp(mut dst: *mut libc::c_void,
-                                           mut dstSize: size_t,
-                                           mut src: *const libc::c_void,
-                                           mut srcSize: size_t,
-                                           mut maxSymbolValue: libc::c_uint,
-                                           mut tableLog: libc::c_uint,
-                                           mut workSpace: *mut libc::c_void,
-                                           mut wkspSize: size_t) -> size_t {
+pub unsafe extern "C" fn FSE_compress_wksp(
+    mut dst: *mut libc::c_void,
+    mut dstSize: size_t,
+    mut src: *const libc::c_void,
+    mut srcSize: size_t,
+    mut maxSymbolValue: libc::c_uint,
+    mut tableLog: libc::c_uint,
+    mut workSpace: *mut libc::c_void,
+    mut wkspSize: size_t,
+) -> size_t {
     let ostart: *mut BYTE = dst as *mut BYTE;
     let mut op: *mut BYTE = ostart;
     let oend: *mut BYTE = ostart.offset(dstSize as isize);
     let mut count: [U32; 256] = [0; 256];
     let mut norm: [S16; 256] = [0; 256];
     let mut CTable: *mut FSE_CTable = workSpace as *mut FSE_CTable;
-    let CTableSize: size_t =
-        ((1i32 + (1i32 << tableLog.wrapping_sub(1i32 as libc::c_uint))) as
-             libc::c_uint).wrapping_add(maxSymbolValue.wrapping_add(1i32 as
-                                                                        libc::c_uint).wrapping_mul(2i32
-                                                                                                       as
-                                                                                                       libc::c_uint))
-            as size_t;
+    let CTableSize: size_t = ((1i32 + (1i32 << tableLog.wrapping_sub(1i32 as libc::c_uint)))
+        as libc::c_uint)
+        .wrapping_add(
+            maxSymbolValue
+                .wrapping_add(1i32 as libc::c_uint)
+                .wrapping_mul(2i32 as libc::c_uint),
+        ) as size_t;
     let mut scratchBuffer: *mut libc::c_void =
         CTable.offset(CTableSize as isize) as *mut libc::c_void;
-    let scratchBufferSize: size_t =
-        wkspSize.wrapping_sub(CTableSize.wrapping_mul(::std::mem::size_of::<FSE_CTable>()
-                                                          as libc::c_ulong));
-    if wkspSize <
-           ((1i32 + (1i32 << tableLog.wrapping_sub(1i32 as libc::c_uint))) as
-                libc::c_uint).wrapping_add(maxSymbolValue.wrapping_add(1i32 as
-                                                                           libc::c_uint).wrapping_mul(2i32
-                                                                                                          as
-                                                                                                          libc::c_uint)).wrapping_add((if tableLog
-                                                                                                                                              >
-                                                                                                                                              12i32
-                                                                                                                                                  as
-                                                                                                                                                  libc::c_uint
-                                                                                                                                          {
-                                                                                                                                           1i32
-                                                                                                                                               <<
-                                                                                                                                               tableLog.wrapping_sub(2i32
-                                                                                                                                                                         as
-                                                                                                                                                                         libc::c_uint)
-                                                                                                                                       } else {
-                                                                                                                                           1024i32
-                                                                                                                                       })
-                                                                                                                                          as
-                                                                                                                                          libc::c_uint)
-               as libc::c_ulong {
-        return -(FSE_error_tableLog_tooLarge as libc::c_int) as size_t
+    let scratchBufferSize: size_t = wkspSize.wrapping_sub(
+        CTableSize.wrapping_mul(::std::mem::size_of::<FSE_CTable>() as libc::c_ulong),
+    );
+    if wkspSize
+        < ((1i32 + (1i32 << tableLog.wrapping_sub(1i32 as libc::c_uint))) as libc::c_uint)
+            .wrapping_add(
+                maxSymbolValue
+                    .wrapping_add(1i32 as libc::c_uint)
+                    .wrapping_mul(2i32 as libc::c_uint),
+            )
+            .wrapping_add(
+                (if tableLog > 12i32 as libc::c_uint {
+                    1i32 << tableLog.wrapping_sub(2i32 as libc::c_uint)
+                } else {
+                    1024i32
+                }) as libc::c_uint,
+            ) as libc::c_ulong
+    {
+        return -(FSE_error_tableLog_tooLarge as libc::c_int) as size_t;
     }
-    if srcSize <= 1i32 as libc::c_ulong { return 0i32 as size_t }
-    if 0 == maxSymbolValue { maxSymbolValue = 255i32 as libc::c_uint }
-    if 0 == tableLog { tableLog = (13i32 - 2i32) as libc::c_uint }
-    let maxCount: size_t =
-        HIST_count_wksp(count.as_mut_ptr(), &mut maxSymbolValue, src, srcSize,
-                        scratchBuffer as *mut libc::c_uint);
-    if 0 != ERR_isError(maxCount) { return maxCount }
-    if maxCount == srcSize { return 1i32 as size_t }
-    if maxCount == 1i32 as libc::c_ulong { return 0i32 as size_t }
-    if maxCount < srcSize >> 7i32 { return 0i32 as size_t }
+    if srcSize <= 1i32 as libc::c_ulong {
+        return 0i32 as size_t;
+    }
+    if 0 == maxSymbolValue {
+        maxSymbolValue = 255i32 as libc::c_uint
+    }
+    if 0 == tableLog {
+        tableLog = (13i32 - 2i32) as libc::c_uint
+    }
+    let maxCount: size_t = HIST_count_wksp(
+        count.as_mut_ptr(),
+        &mut maxSymbolValue,
+        src,
+        srcSize,
+        scratchBuffer as *mut libc::c_uint,
+    );
+    if 0 != ERR_isError(maxCount) {
+        return maxCount;
+    }
+    if maxCount == srcSize {
+        return 1i32 as size_t;
+    }
+    if maxCount == 1i32 as libc::c_ulong {
+        return 0i32 as size_t;
+    }
+    if maxCount < srcSize >> 7i32 {
+        return 0i32 as size_t;
+    }
     tableLog = FSE_optimalTableLog(tableLog, srcSize, maxSymbolValue);
-    let _var_err__: size_t =
-        FSE_normalizeCount(norm.as_mut_ptr(), tableLog, count.as_mut_ptr(),
-                           srcSize, maxSymbolValue);
-    if 0 != ERR_isError(_var_err__) { return _var_err__ }
-    let nc_err: size_t =
-        FSE_writeNCount(op as *mut libc::c_void,
-                        oend.wrapping_offset_from(op) as libc::c_long as
-                            size_t, norm.as_mut_ptr(), maxSymbolValue,
-                        tableLog);
-    if 0 != ERR_isError(nc_err) { return nc_err }
+    let _var_err__: size_t = FSE_normalizeCount(
+        norm.as_mut_ptr(),
+        tableLog,
+        count.as_mut_ptr(),
+        srcSize,
+        maxSymbolValue,
+    );
+    if 0 != ERR_isError(_var_err__) {
+        return _var_err__;
+    }
+    let nc_err: size_t = FSE_writeNCount(
+        op as *mut libc::c_void,
+        oend.wrapping_offset_from(op) as libc::c_long as size_t,
+        norm.as_mut_ptr(),
+        maxSymbolValue,
+        tableLog,
+    );
+    if 0 != ERR_isError(nc_err) {
+        return nc_err;
+    }
     op = op.offset(nc_err as isize);
-    let _var_err___0: size_t =
-        FSE_buildCTable_wksp(CTable, norm.as_mut_ptr(), maxSymbolValue,
-                             tableLog, scratchBuffer, scratchBufferSize);
-    if 0 != ERR_isError(_var_err___0) { return _var_err___0 }
-    let cSize: size_t =
-        FSE_compress_usingCTable(op as *mut libc::c_void,
-                                 oend.wrapping_offset_from(op) as libc::c_long
-                                     as size_t, src, srcSize, CTable);
-    if 0 != ERR_isError(cSize) { return cSize }
-    if cSize == 0i32 as libc::c_ulong { return 0i32 as size_t }
+    let _var_err___0: size_t = FSE_buildCTable_wksp(
+        CTable,
+        norm.as_mut_ptr(),
+        maxSymbolValue,
+        tableLog,
+        scratchBuffer,
+        scratchBufferSize,
+    );
+    if 0 != ERR_isError(_var_err___0) {
+        return _var_err___0;
+    }
+    let cSize: size_t = FSE_compress_usingCTable(
+        op as *mut libc::c_void,
+        oend.wrapping_offset_from(op) as libc::c_long as size_t,
+        src,
+        srcSize,
+        CTable,
+    );
+    if 0 != ERR_isError(cSize) {
+        return cSize;
+    }
+    if cSize == 0i32 as libc::c_ulong {
+        return 0i32 as size_t;
+    }
     op = op.offset(cSize as isize);
-    if op.wrapping_offset_from(ostart) as libc::c_long as size_t >=
-           srcSize.wrapping_sub(1i32 as libc::c_ulong) {
-        return 0i32 as size_t
+    if op.wrapping_offset_from(ostart) as libc::c_long as size_t
+        >= srcSize.wrapping_sub(1i32 as libc::c_ulong)
+    {
+        return 0i32 as size_t;
     }
     return op.wrapping_offset_from(ostart) as libc::c_long as size_t;
 }
 /* ! FSE_compress_usingCTable():
-    Compress `src` using `ct` into `dst` which must be already allocated.
-    @return : size of compressed data (<= `dstCapacity`),
-              or 0 if compressed data could not fit into `dst`,
-              or an errorCode, which can be tested using FSE_isError() */
+Compress `src` using `ct` into `dst` which must be already allocated.
+@return : size of compressed data (<= `dstCapacity`),
+          or 0 if compressed data could not fit into `dst`,
+          or an errorCode, which can be tested using FSE_isError() */
 #[no_mangle]
-pub unsafe extern "C" fn FSE_compress_usingCTable(mut dst: *mut libc::c_void,
-                                                  mut dstSize: size_t,
-                                                  mut src:
-                                                      *const libc::c_void,
-                                                  mut srcSize: size_t,
-                                                  mut ct: *const FSE_CTable)
- -> size_t {
+pub unsafe extern "C" fn FSE_compress_usingCTable(
+    mut dst: *mut libc::c_void,
+    mut dstSize: size_t,
+    mut src: *const libc::c_void,
+    mut srcSize: size_t,
+    mut ct: *const FSE_CTable,
+) -> size_t {
     let fast: libc::c_uint =
-        (dstSize >= srcSize.wrapping_add(srcSize >> 7i32)) as libc::c_int as
-            libc::c_uint;
+        (dstSize >= srcSize.wrapping_add(srcSize >> 7i32)) as libc::c_int as libc::c_uint;
     if 0 != fast {
-        return FSE_compress_usingCTable_generic(dst, dstSize, src, srcSize,
-                                                ct, 1i32 as libc::c_uint)
+        return FSE_compress_usingCTable_generic(
+            dst,
+            dstSize,
+            src,
+            srcSize,
+            ct,
+            1i32 as libc::c_uint,
+        );
     } else {
-        return FSE_compress_usingCTable_generic(dst, dstSize, src, srcSize,
-                                                ct, 0i32 as libc::c_uint)
+        return FSE_compress_usingCTable_generic(
+            dst,
+            dstSize,
+            src,
+            srcSize,
+            ct,
+            0i32 as libc::c_uint,
+        );
     };
 }
-unsafe extern "C" fn FSE_compress_usingCTable_generic(mut dst:
-                                                          *mut libc::c_void,
-                                                      mut dstSize: size_t,
-                                                      mut src:
-                                                          *const libc::c_void,
-                                                      mut srcSize: size_t,
-                                                      mut ct:
-                                                          *const FSE_CTable,
-                                                      fast: libc::c_uint)
- -> size_t {
+unsafe extern "C" fn FSE_compress_usingCTable_generic(
+    mut dst: *mut libc::c_void,
+    mut dstSize: size_t,
+    mut src: *const libc::c_void,
+    mut srcSize: size_t,
+    mut ct: *const FSE_CTable,
+    fast: libc::c_uint,
+) -> size_t {
     let istart: *const BYTE = src as *const BYTE;
     let iend: *const BYTE = istart.offset(srcSize as isize);
     let mut ip: *const BYTE = iend;
-    let mut bitC: BIT_CStream_t =
-        BIT_CStream_t{bitContainer: 0,
-                      bitPos: 0,
-                      startPtr: 0 as *mut libc::c_char,
-                      ptr: 0 as *mut libc::c_char,
-                      endPtr: 0 as *mut libc::c_char,};
-    let mut CState1: FSE_CState_t =
-        FSE_CState_t{value: 0,
-                     stateTable: 0 as *const libc::c_void,
-                     symbolTT: 0 as *const libc::c_void,
-                     stateLog: 0,};
-    let mut CState2: FSE_CState_t =
-        FSE_CState_t{value: 0,
-                     stateTable: 0 as *const libc::c_void,
-                     symbolTT: 0 as *const libc::c_void,
-                     stateLog: 0,};
-    if srcSize <= 2i32 as libc::c_ulong { return 0i32 as size_t }
+    let mut bitC: BIT_CStream_t = BIT_CStream_t {
+        bitContainer: 0,
+        bitPos: 0,
+        startPtr: 0 as *mut libc::c_char,
+        ptr: 0 as *mut libc::c_char,
+        endPtr: 0 as *mut libc::c_char,
+    };
+    let mut CState1: FSE_CState_t = FSE_CState_t {
+        value: 0,
+        stateTable: 0 as *const libc::c_void,
+        symbolTT: 0 as *const libc::c_void,
+        stateLog: 0,
+    };
+    let mut CState2: FSE_CState_t = FSE_CState_t {
+        value: 0,
+        stateTable: 0 as *const libc::c_void,
+        symbolTT: 0 as *const libc::c_void,
+        stateLog: 0,
+    };
+    if srcSize <= 2i32 as libc::c_ulong {
+        return 0i32 as size_t;
+    }
     let initError: size_t = BIT_initCStream(&mut bitC, dst, dstSize);
-    if 0 != ERR_isError(initError) { return 0i32 as size_t }
+    if 0 != ERR_isError(initError) {
+        return 0i32 as size_t;
+    }
     if 0 != srcSize & 1i32 as libc::c_ulong {
         ip = ip.offset(-1isize);
         FSE_initCState2(&mut CState1, ct, *ip as U32);
@@ -687,43 +766,47 @@ unsafe extern "C" fn FSE_compress_usingCTable_generic(mut dst:
         FSE_encodeSymbol(&mut bitC, &mut CState1, *ip as libc::c_uint);
         if 0 != fast {
             BIT_flushBitsFast(&mut bitC);
-        } else { BIT_flushBits(&mut bitC); };
+        } else {
+            BIT_flushBits(&mut bitC);
+        };
     } else {
         ip = ip.offset(-1isize);
         FSE_initCState2(&mut CState2, ct, *ip as U32);
         ip = ip.offset(-1isize);
         FSE_initCState2(&mut CState1, ct, *ip as U32);
     }
-    srcSize =
-        (srcSize as libc::c_ulong).wrapping_sub(2i32 as libc::c_ulong) as
-            size_t as size_t;
-    if (::std::mem::size_of::<size_t>() as
-            libc::c_ulong).wrapping_mul(8i32 as libc::c_ulong) >
-           ((14i32 - 2i32) * 4i32 + 7i32) as libc::c_ulong &&
-           0 != srcSize & 2i32 as libc::c_ulong {
+    srcSize = (srcSize as libc::c_ulong).wrapping_sub(2i32 as libc::c_ulong) as size_t as size_t;
+    if (::std::mem::size_of::<size_t>() as libc::c_ulong).wrapping_mul(8i32 as libc::c_ulong)
+        > ((14i32 - 2i32) * 4i32 + 7i32) as libc::c_ulong
+        && 0 != srcSize & 2i32 as libc::c_ulong
+    {
         ip = ip.offset(-1isize);
         FSE_encodeSymbol(&mut bitC, &mut CState2, *ip as libc::c_uint);
         ip = ip.offset(-1isize);
         FSE_encodeSymbol(&mut bitC, &mut CState1, *ip as libc::c_uint);
         if 0 != fast {
             BIT_flushBitsFast(&mut bitC);
-        } else { BIT_flushBits(&mut bitC); };
+        } else {
+            BIT_flushBits(&mut bitC);
+        };
     }
     while ip > istart {
         ip = ip.offset(-1isize);
         FSE_encodeSymbol(&mut bitC, &mut CState2, *ip as libc::c_uint);
-        if (::std::mem::size_of::<size_t>() as
-                libc::c_ulong).wrapping_mul(8i32 as libc::c_ulong) <
-               ((14i32 - 2i32) * 2i32 + 7i32) as libc::c_ulong {
+        if (::std::mem::size_of::<size_t>() as libc::c_ulong).wrapping_mul(8i32 as libc::c_ulong)
+            < ((14i32 - 2i32) * 2i32 + 7i32) as libc::c_ulong
+        {
             if 0 != fast {
                 BIT_flushBitsFast(&mut bitC);
-            } else { BIT_flushBits(&mut bitC); };
+            } else {
+                BIT_flushBits(&mut bitC);
+            };
         }
         ip = ip.offset(-1isize);
         FSE_encodeSymbol(&mut bitC, &mut CState1, *ip as libc::c_uint);
-        if (::std::mem::size_of::<size_t>() as
-                libc::c_ulong).wrapping_mul(8i32 as libc::c_ulong) >
-               ((14i32 - 2i32) * 4i32 + 7i32) as libc::c_ulong {
+        if (::std::mem::size_of::<size_t>() as libc::c_ulong).wrapping_mul(8i32 as libc::c_ulong)
+            > ((14i32 - 2i32) * 4i32 + 7i32) as libc::c_ulong
+        {
             ip = ip.offset(-1isize);
             FSE_encodeSymbol(&mut bitC, &mut CState2, *ip as libc::c_uint);
             ip = ip.offset(-1isize);
@@ -731,68 +814,69 @@ unsafe extern "C" fn FSE_compress_usingCTable_generic(mut dst:
         }
         if 0 != fast {
             BIT_flushBitsFast(&mut bitC);
-        } else { BIT_flushBits(&mut bitC); };
+        } else {
+            BIT_flushBits(&mut bitC);
+        };
     }
     FSE_flushCState(&mut bitC, &mut CState2);
     FSE_flushCState(&mut bitC, &mut CState1);
     return BIT_closeCStream(&mut bitC);
 }
-unsafe extern "C" fn FSE_flushCState(mut bitC: *mut BIT_CStream_t,
-                                     mut statePtr: *const FSE_CState_t) {
+unsafe extern "C" fn FSE_flushCState(
+    mut bitC: *mut BIT_CStream_t,
+    mut statePtr: *const FSE_CState_t,
+) {
     BIT_addBits(bitC, (*statePtr).value as size_t, (*statePtr).stateLog);
     BIT_flushBits(bitC);
 }
-unsafe extern "C" fn FSE_encodeSymbol(mut bitC: *mut BIT_CStream_t,
-                                      mut statePtr: *mut FSE_CState_t,
-                                      mut symbol: U32) {
+unsafe extern "C" fn FSE_encodeSymbol(
+    mut bitC: *mut BIT_CStream_t,
+    mut statePtr: *mut FSE_CState_t,
+    mut symbol: U32,
+) {
     let symbolTT: FSE_symbolCompressionTransform =
-        *((*statePtr).symbolTT as
-              *const FSE_symbolCompressionTransform).offset(symbol as isize);
+        *((*statePtr).symbolTT as *const FSE_symbolCompressionTransform).offset(symbol as isize);
     let stateTable: *const U16 = (*statePtr).stateTable as *const U16;
-    let nbBitsOut: U32 =
-        ((*statePtr).value + symbolTT.deltaNbBits as libc::c_long >> 16i32) as
-            U32;
+    let nbBitsOut: U32 = ((*statePtr).value + symbolTT.deltaNbBits as libc::c_long >> 16i32) as U32;
     BIT_addBits(bitC, (*statePtr).value as size_t, nbBitsOut);
-    (*statePtr).value =
-        *stateTable.offset((((*statePtr).value >> nbBitsOut) +
-                                symbolTT.deltaFindState as libc::c_long) as
-                               isize) as ptrdiff_t;
+    (*statePtr).value = *stateTable.offset(
+        (((*statePtr).value >> nbBitsOut) + symbolTT.deltaFindState as libc::c_long) as isize,
+    ) as ptrdiff_t;
 }
 /* ! FSE_initCState2() :
 *   Same as FSE_initCState(), but the first symbol to include (which will be the last to be read)
 *   uses the smallest state value possible, saving the cost of this symbol */
-unsafe extern "C" fn FSE_initCState2(mut statePtr: *mut FSE_CState_t,
-                                     mut ct: *const FSE_CTable,
-                                     mut symbol: U32) {
+unsafe extern "C" fn FSE_initCState2(
+    mut statePtr: *mut FSE_CState_t,
+    mut ct: *const FSE_CTable,
+    mut symbol: U32,
+) {
     FSE_initCState(statePtr, ct);
     let symbolTT: FSE_symbolCompressionTransform =
-        *((*statePtr).symbolTT as
-              *const FSE_symbolCompressionTransform).offset(symbol as isize);
+        *((*statePtr).symbolTT as *const FSE_symbolCompressionTransform).offset(symbol as isize);
     let mut stateTable: *const U16 = (*statePtr).stateTable as *const U16;
-    let mut nbBitsOut: U32 =
-        symbolTT.deltaNbBits.wrapping_add((1i32 << 15i32) as libc::c_uint) >>
-            16i32;
-    (*statePtr).value =
-        (nbBitsOut << 16i32).wrapping_sub(symbolTT.deltaNbBits) as ptrdiff_t;
-    (*statePtr).value =
-        *stateTable.offset((((*statePtr).value >> nbBitsOut) +
-                                symbolTT.deltaFindState as libc::c_long) as
-                               isize) as ptrdiff_t;
+    let mut nbBitsOut: U32 = symbolTT
+        .deltaNbBits
+        .wrapping_add((1i32 << 15i32) as libc::c_uint)
+        >> 16i32;
+    (*statePtr).value = (nbBitsOut << 16i32).wrapping_sub(symbolTT.deltaNbBits) as ptrdiff_t;
+    (*statePtr).value = *stateTable.offset(
+        (((*statePtr).value >> nbBitsOut) + symbolTT.deltaFindState as libc::c_long) as isize,
+    ) as ptrdiff_t;
 }
-unsafe extern "C" fn FSE_initCState(mut statePtr: *mut FSE_CState_t,
-                                    mut ct: *const FSE_CTable) {
+unsafe extern "C" fn FSE_initCState(mut statePtr: *mut FSE_CState_t, mut ct: *const FSE_CTable) {
     let mut ptr: *const libc::c_void = ct as *const libc::c_void;
     let mut u16ptr: *const U16 = ptr as *const U16;
     let tableLog: U32 = MEM_read16(ptr) as U32;
     (*statePtr).value = (1i32 as ptrdiff_t) << tableLog;
     (*statePtr).stateTable = u16ptr.offset(2isize) as *const libc::c_void;
-    (*statePtr).symbolTT =
-        ct.offset(1isize).offset((if 0 != tableLog {
-                                      1i32 <<
-                                          tableLog.wrapping_sub(1i32 as
-                                                                    libc::c_uint)
-                                  } else { 1i32 }) as isize) as
-            *const libc::c_void;
+    (*statePtr).symbolTT = ct.offset(1isize).offset(
+        (if 0 != tableLog {
+            1i32 << tableLog.wrapping_sub(1i32 as libc::c_uint)
+        } else {
+            1i32
+        }) as isize,
+    ) as *const libc::c_void;
     (*statePtr).stateLog = tableLog;
 }
 /* *< build a fake FSE_CTable, designed to compress always the same symbolValue */
@@ -801,41 +885,37 @@ unsafe extern "C" fn FSE_initCState(mut statePtr: *mut FSE_CState_t,
  * `wkspSize` must be >= `(1<<tableLog)`.
  */
 #[no_mangle]
-pub unsafe extern "C" fn FSE_buildCTable_wksp(mut ct: *mut FSE_CTable,
-                                              mut normalizedCounter:
-                                                  *const libc::c_short,
-                                              mut maxSymbolValue:
-                                                  libc::c_uint,
-                                              mut tableLog: libc::c_uint,
-                                              mut workSpace:
-                                                  *mut libc::c_void,
-                                              mut wkspSize: size_t)
- -> size_t {
+pub unsafe extern "C" fn FSE_buildCTable_wksp(
+    mut ct: *mut FSE_CTable,
+    mut normalizedCounter: *const libc::c_short,
+    mut maxSymbolValue: libc::c_uint,
+    mut tableLog: libc::c_uint,
+    mut workSpace: *mut libc::c_void,
+    mut wkspSize: size_t,
+) -> size_t {
     let tableSize: U32 = (1i32 << tableLog) as U32;
     let tableMask: U32 = tableSize.wrapping_sub(1i32 as libc::c_uint);
     let ptr: *mut libc::c_void = ct as *mut libc::c_void;
     let tableU16: *mut U16 = (ptr as *mut U16).offset(2isize);
     /* header */
-    let FSCT: *mut libc::c_void =
-        (ptr as
-             *mut U32).offset(1isize).offset((if 0 != tableLog {
-                                                  tableSize >> 1i32
-                                              } else { 1i32 as libc::c_uint })
-                                                 as isize) as
-            *mut libc::c_void;
-    let symbolTT: *mut FSE_symbolCompressionTransform =
-        FSCT as *mut FSE_symbolCompressionTransform;
-    let step: U32 =
-        (tableSize >>
-             1i32).wrapping_add(tableSize >>
-                                    3i32).wrapping_add(3i32 as libc::c_uint);
+    let FSCT: *mut libc::c_void = (ptr as *mut U32).offset(1isize).offset(
+        (if 0 != tableLog {
+            tableSize >> 1i32
+        } else {
+            1i32 as libc::c_uint
+        }) as isize,
+    ) as *mut libc::c_void;
+    let symbolTT: *mut FSE_symbolCompressionTransform = FSCT as *mut FSE_symbolCompressionTransform;
+    let step: U32 = (tableSize >> 1i32)
+        .wrapping_add(tableSize >> 3i32)
+        .wrapping_add(3i32 as libc::c_uint);
     let mut cumul: [U32; 257] = [0; 257];
     let tableSymbol: *mut BYTE = workSpace as *mut BYTE;
     let mut highThreshold: U32 = tableSize.wrapping_sub(1i32 as libc::c_uint);
-    if ((1i32 as size_t) <<
-            tableLog).wrapping_mul(::std::mem::size_of::<BYTE>() as
-                                       libc::c_ulong) > wkspSize {
-        return -(FSE_error_tableLog_tooLarge as libc::c_int) as size_t
+    if ((1i32 as size_t) << tableLog).wrapping_mul(::std::mem::size_of::<BYTE>() as libc::c_ulong)
+        > wkspSize
+    {
+        return -(FSE_error_tableLog_tooLarge as libc::c_int) as size_t;
     }
     *tableU16.offset(-2i32 as isize) = tableLog as U16;
     *tableU16.offset(-1i32 as isize) = maxSymbolValue as U16;
@@ -843,24 +923,19 @@ pub unsafe extern "C" fn FSE_buildCTable_wksp(mut ct: *mut FSE_CTable,
     cumul[0usize] = 0i32 as U32;
     u = 1i32 as U32;
     while u <= maxSymbolValue.wrapping_add(1i32 as libc::c_uint) {
-        if *normalizedCounter.offset(u.wrapping_sub(1i32 as libc::c_uint) as
-                                         isize) as libc::c_int == -1i32 {
-            cumul[u as usize] =
-                cumul[u.wrapping_sub(1i32 as libc::c_uint) as
-                          usize].wrapping_add(1i32 as libc::c_uint);
+        if *normalizedCounter.offset(u.wrapping_sub(1i32 as libc::c_uint) as isize) as libc::c_int
+            == -1i32
+        {
+            cumul[u as usize] = cumul[u.wrapping_sub(1i32 as libc::c_uint) as usize]
+                .wrapping_add(1i32 as libc::c_uint);
             let fresh0 = highThreshold;
             highThreshold = highThreshold.wrapping_sub(1);
-            *tableSymbol.offset(fresh0 as isize) =
-                u.wrapping_sub(1i32 as libc::c_uint) as BYTE
+            *tableSymbol.offset(fresh0 as isize) = u.wrapping_sub(1i32 as libc::c_uint) as BYTE
         } else {
-            cumul[u as usize] =
-                cumul[u.wrapping_sub(1i32 as libc::c_uint) as
-                          usize].wrapping_add(*normalizedCounter.offset(u.wrapping_sub(1i32
-                                                                                           as
-                                                                                           libc::c_uint)
-                                                                            as
-                                                                            isize)
-                                                  as libc::c_uint)
+            cumul[u as usize] = cumul[u.wrapping_sub(1i32 as libc::c_uint) as usize].wrapping_add(
+                *normalizedCounter.offset(u.wrapping_sub(1i32 as libc::c_uint) as isize)
+                    as libc::c_uint,
+            )
         }
         u = u.wrapping_add(1)
     }
@@ -872,8 +947,7 @@ pub unsafe extern "C" fn FSE_buildCTable_wksp(mut ct: *mut FSE_CTable,
     while symbol <= maxSymbolValue {
         let mut nbOccurences: libc::c_int = 0;
         nbOccurences = 0i32;
-        while nbOccurences <
-                  *normalizedCounter.offset(symbol as isize) as libc::c_int {
+        while nbOccurences < *normalizedCounter.offset(symbol as isize) as libc::c_int {
             *tableSymbol.offset(position as isize) = symbol as BYTE;
             position = position.wrapping_add(step) & tableMask;
             while position > highThreshold {
@@ -884,7 +958,7 @@ pub unsafe extern "C" fn FSE_buildCTable_wksp(mut ct: *mut FSE_CTable,
         symbol = symbol.wrapping_add(1)
     }
     if position != 0i32 as libc::c_uint {
-        return -(FSE_error_GENERIC as libc::c_int) as size_t
+        return -(FSE_error_GENERIC as libc::c_int) as size_t;
     }
     let mut u_0: U32 = 0;
     u_0 = 0i32 as U32;
@@ -892,8 +966,7 @@ pub unsafe extern "C" fn FSE_buildCTable_wksp(mut ct: *mut FSE_CTable,
         let mut s: BYTE = *tableSymbol.offset(u_0 as isize);
         let fresh1 = cumul[s as usize];
         cumul[s as usize] = cumul[s as usize].wrapping_add(1);
-        *tableU16.offset(fresh1 as isize) =
-            tableSize.wrapping_add(u_0) as U16;
+        *tableU16.offset(fresh1 as isize) = tableSize.wrapping_add(u_0) as U16;
         u_0 = u_0.wrapping_add(1)
     }
     let mut total: libc::c_uint = 0i32 as libc::c_uint;
@@ -903,37 +976,28 @@ pub unsafe extern "C" fn FSE_buildCTable_wksp(mut ct: *mut FSE_CTable,
         match *normalizedCounter.offset(s_0 as isize) as libc::c_int {
             0 => {
                 (*symbolTT.offset(s_0 as isize)).deltaNbBits =
-                    (tableLog.wrapping_add(1i32 as libc::c_uint) <<
-                         16i32).wrapping_sub((1i32 << tableLog) as
-                                                 libc::c_uint)
+                    (tableLog.wrapping_add(1i32 as libc::c_uint) << 16i32)
+                        .wrapping_sub((1i32 << tableLog) as libc::c_uint)
             }
             -1 | 1 => {
                 (*symbolTT.offset(s_0 as isize)).deltaNbBits =
-                    (tableLog <<
-                         16i32).wrapping_sub((1i32 << tableLog) as
-                                                 libc::c_uint);
+                    (tableLog << 16i32).wrapping_sub((1i32 << tableLog) as libc::c_uint);
                 (*symbolTT.offset(s_0 as isize)).deltaFindState =
                     total.wrapping_sub(1i32 as libc::c_uint) as libc::c_int;
                 total = total.wrapping_add(1)
             }
             _ => {
-                let maxBitsOut: U32 =
-                    tableLog.wrapping_sub(BIT_highbit32((*normalizedCounter.offset(s_0
-                                                                                       as
-                                                                                       isize)
-                                                             as libc::c_int -
-                                                             1i32) as U32));
+                let maxBitsOut: U32 = tableLog.wrapping_sub(BIT_highbit32(
+                    (*normalizedCounter.offset(s_0 as isize) as libc::c_int - 1i32) as U32,
+                ));
                 let minStatePlus: U32 =
-                    ((*normalizedCounter.offset(s_0 as isize) as libc::c_int)
-                         << maxBitsOut) as U32;
+                    ((*normalizedCounter.offset(s_0 as isize) as libc::c_int) << maxBitsOut) as U32;
                 (*symbolTT.offset(s_0 as isize)).deltaNbBits =
                     (maxBitsOut << 16i32).wrapping_sub(minStatePlus);
-                (*symbolTT.offset(s_0 as isize)).deltaFindState =
-                    total.wrapping_sub(*normalizedCounter.offset(s_0 as isize)
-                                           as libc::c_uint) as libc::c_int;
-                total =
-                    total.wrapping_add(*normalizedCounter.offset(s_0 as isize)
-                                           as libc::c_uint)
+                (*symbolTT.offset(s_0 as isize)).deltaFindState = total
+                    .wrapping_sub(*normalizedCounter.offset(s_0 as isize) as libc::c_uint)
+                    as libc::c_int;
+                total = total.wrapping_add(*normalizedCounter.offset(s_0 as isize) as libc::c_uint)
             }
         }
         s_0 = s_0.wrapping_add(1)
@@ -941,40 +1005,50 @@ pub unsafe extern "C" fn FSE_buildCTable_wksp(mut ct: *mut FSE_CTable,
     return 0i32 as size_t;
 }
 /* ! FSE_writeNCount():
-    Compactly save 'normalizedCounter' into 'buffer'.
-    @return : size of the compressed table,
-              or an errorCode, which can be tested using FSE_isError(). */
+Compactly save 'normalizedCounter' into 'buffer'.
+@return : size of the compressed table,
+          or an errorCode, which can be tested using FSE_isError(). */
 #[no_mangle]
-pub unsafe extern "C" fn FSE_writeNCount(mut buffer: *mut libc::c_void,
-                                         mut bufferSize: size_t,
-                                         mut normalizedCounter:
-                                             *const libc::c_short,
-                                         mut maxSymbolValue: libc::c_uint,
-                                         mut tableLog: libc::c_uint)
- -> size_t {
+pub unsafe extern "C" fn FSE_writeNCount(
+    mut buffer: *mut libc::c_void,
+    mut bufferSize: size_t,
+    mut normalizedCounter: *const libc::c_short,
+    mut maxSymbolValue: libc::c_uint,
+    mut tableLog: libc::c_uint,
+) -> size_t {
     if tableLog > (14i32 - 2i32) as libc::c_uint {
-        return -(FSE_error_tableLog_tooLarge as libc::c_int) as size_t
+        return -(FSE_error_tableLog_tooLarge as libc::c_int) as size_t;
     }
     if tableLog < 5i32 as libc::c_uint {
-        return -(FSE_error_GENERIC as libc::c_int) as size_t
+        return -(FSE_error_GENERIC as libc::c_int) as size_t;
     }
     if bufferSize < FSE_NCountWriteBound(maxSymbolValue, tableLog) {
-        return FSE_writeNCount_generic(buffer, bufferSize, normalizedCounter,
-                                       maxSymbolValue, tableLog,
-                                       0i32 as libc::c_uint)
+        return FSE_writeNCount_generic(
+            buffer,
+            bufferSize,
+            normalizedCounter,
+            maxSymbolValue,
+            tableLog,
+            0i32 as libc::c_uint,
+        );
     }
-    return FSE_writeNCount_generic(buffer, bufferSize, normalizedCounter,
-                                   maxSymbolValue, tableLog,
-                                   1i32 as libc::c_uint);
+    return FSE_writeNCount_generic(
+        buffer,
+        bufferSize,
+        normalizedCounter,
+        maxSymbolValue,
+        tableLog,
+        1i32 as libc::c_uint,
+    );
 }
-unsafe extern "C" fn FSE_writeNCount_generic(mut header: *mut libc::c_void,
-                                             mut headerBufferSize: size_t,
-                                             mut normalizedCounter:
-                                                 *const libc::c_short,
-                                             mut maxSymbolValue: libc::c_uint,
-                                             mut tableLog: libc::c_uint,
-                                             mut writeIsSafe: libc::c_uint)
- -> size_t {
+unsafe extern "C" fn FSE_writeNCount_generic(
+    mut header: *mut libc::c_void,
+    mut headerBufferSize: size_t,
+    mut normalizedCounter: *const libc::c_short,
+    mut maxSymbolValue: libc::c_uint,
+    mut tableLog: libc::c_uint,
+    mut writeIsSafe: libc::c_uint,
+) -> size_t {
     let ostart: *mut BYTE = header as *mut BYTE;
     let mut out: *mut BYTE = ostart;
     let oend: *mut BYTE = ostart.offset(headerBufferSize as isize);
@@ -988,11 +1062,9 @@ unsafe extern "C" fn FSE_writeNCount_generic(mut header: *mut libc::c_void,
     let mut previous0: libc::c_int = 0i32;
     bitStream = 0i32 as U32;
     bitCount = 0i32;
-    bitStream =
-        (bitStream as
-             libc::c_uint).wrapping_add(tableLog.wrapping_sub(5i32 as
-                                                                  libc::c_uint)
-                                            << bitCount) as U32 as U32;
+    bitStream = (bitStream as libc::c_uint)
+        .wrapping_add(tableLog.wrapping_sub(5i32 as libc::c_uint) << bitCount)
+        as U32 as U32;
     bitCount += 4i32;
     remaining = tableSize + 1i32;
     threshold = tableSize;
@@ -1006,12 +1078,9 @@ unsafe extern "C" fn FSE_writeNCount_generic(mut header: *mut libc::c_void,
             while charnum >= start.wrapping_add(24i32 as libc::c_uint) {
                 start = start.wrapping_add(24i32 as libc::c_uint);
                 bitStream =
-                    (bitStream as
-                         libc::c_uint).wrapping_add(0xffffu32 << bitCount) as
-                        U32 as U32;
+                    (bitStream as libc::c_uint).wrapping_add(0xffffu32 << bitCount) as U32 as U32;
                 if 0 == writeIsSafe && out > oend.offset(-2isize) {
-                    return -(FSE_error_dstSize_tooSmall as libc::c_int) as
-                               size_t
+                    return -(FSE_error_dstSize_tooSmall as libc::c_int) as size_t;
                 }
                 *out.offset(0isize) = bitStream as BYTE;
                 *out.offset(1isize) = (bitStream >> 8i32) as BYTE;
@@ -1020,22 +1089,18 @@ unsafe extern "C" fn FSE_writeNCount_generic(mut header: *mut libc::c_void,
             }
             while charnum >= start.wrapping_add(3i32 as libc::c_uint) {
                 start = start.wrapping_add(3i32 as libc::c_uint);
-                bitStream =
-                    (bitStream as
-                         libc::c_uint).wrapping_add((3i32 << bitCount) as
-                                                        libc::c_uint) as U32
-                        as U32;
+                bitStream = (bitStream as libc::c_uint)
+                    .wrapping_add((3i32 << bitCount) as libc::c_uint)
+                    as U32 as U32;
                 bitCount += 2i32
             }
-            bitStream =
-                (bitStream as
-                     libc::c_uint).wrapping_add(charnum.wrapping_sub(start) <<
-                                                    bitCount) as U32 as U32;
+            bitStream = (bitStream as libc::c_uint)
+                .wrapping_add(charnum.wrapping_sub(start) << bitCount)
+                as U32 as U32;
             bitCount += 2i32;
             if bitCount > 16i32 {
                 if 0 == writeIsSafe && out > oend.offset(-2isize) {
-                    return -(FSE_error_dstSize_tooSmall as libc::c_int) as
-                               size_t
+                    return -(FSE_error_dstSize_tooSmall as libc::c_int) as size_t;
                 }
                 *out.offset(0isize) = bitStream as BYTE;
                 *out.offset(1isize) = (bitStream >> 8i32) as BYTE;
@@ -1046,26 +1111,28 @@ unsafe extern "C" fn FSE_writeNCount_generic(mut header: *mut libc::c_void,
         }
         let fresh2 = charnum;
         charnum = charnum.wrapping_add(1);
-        let mut count: libc::c_int =
-            *normalizedCounter.offset(fresh2 as isize) as libc::c_int;
+        let mut count: libc::c_int = *normalizedCounter.offset(fresh2 as isize) as libc::c_int;
         let max: libc::c_int = 2i32 * threshold - 1i32 - remaining;
         remaining -= if count < 0i32 { -count } else { count };
         count += 1;
-        if count >= threshold { count += max }
-        bitStream =
-            (bitStream as
-                 libc::c_uint).wrapping_add((count << bitCount) as
-                                                libc::c_uint) as U32 as U32;
+        if count >= threshold {
+            count += max
+        }
+        bitStream = (bitStream as libc::c_uint).wrapping_add((count << bitCount) as libc::c_uint)
+            as U32 as U32;
         bitCount += nbBits;
         bitCount -= (count < max) as libc::c_int;
         previous0 = (count == 1i32) as libc::c_int;
         if remaining < 1i32 {
-            return -(FSE_error_GENERIC as libc::c_int) as size_t
+            return -(FSE_error_GENERIC as libc::c_int) as size_t;
         }
-        while remaining < threshold { nbBits -= 1; threshold >>= 1i32 }
+        while remaining < threshold {
+            nbBits -= 1;
+            threshold >>= 1i32
+        }
         if bitCount > 16i32 {
             if 0 == writeIsSafe && out > oend.offset(-2isize) {
-                return -(FSE_error_dstSize_tooSmall as libc::c_int) as size_t
+                return -(FSE_error_dstSize_tooSmall as libc::c_int) as size_t;
             }
             *out.offset(0isize) = bitStream as BYTE;
             *out.offset(1isize) = (bitStream >> 8i32) as BYTE;
@@ -1075,64 +1142,72 @@ unsafe extern "C" fn FSE_writeNCount_generic(mut header: *mut libc::c_void,
         }
     }
     if 0 == writeIsSafe && out > oend.offset(-2isize) {
-        return -(FSE_error_dstSize_tooSmall as libc::c_int) as size_t
+        return -(FSE_error_dstSize_tooSmall as libc::c_int) as size_t;
     }
     *out.offset(0isize) = bitStream as BYTE;
     *out.offset(1isize) = (bitStream >> 8i32) as BYTE;
     out = out.offset(((bitCount + 7i32) / 8i32) as isize);
     if charnum > maxSymbolValue.wrapping_add(1i32 as libc::c_uint) {
-        return -(FSE_error_GENERIC as libc::c_int) as size_t
+        return -(FSE_error_GENERIC as libc::c_int) as size_t;
     }
     return out.wrapping_offset_from(ostart) as libc::c_long as size_t;
 }
 /* ! FSE_NCountWriteBound():
-    Provides the maximum possible size of an FSE normalized table, given 'maxSymbolValue' and 'tableLog'.
-    Typically useful for allocation purpose. */
+Provides the maximum possible size of an FSE normalized table, given 'maxSymbolValue' and 'tableLog'.
+Typically useful for allocation purpose. */
 #[no_mangle]
-pub unsafe extern "C" fn FSE_NCountWriteBound(mut maxSymbolValue:
-                                                  libc::c_uint,
-                                              mut tableLog: libc::c_uint)
- -> size_t {
-    let maxHeaderSize: size_t =
-        (maxSymbolValue.wrapping_add(1i32 as
-                                         libc::c_uint).wrapping_mul(tableLog)
-             >> 3i32).wrapping_add(3i32 as libc::c_uint) as size_t;
+pub unsafe extern "C" fn FSE_NCountWriteBound(
+    mut maxSymbolValue: libc::c_uint,
+    mut tableLog: libc::c_uint,
+) -> size_t {
+    let maxHeaderSize: size_t = (maxSymbolValue
+        .wrapping_add(1i32 as libc::c_uint)
+        .wrapping_mul(tableLog)
+        >> 3i32)
+        .wrapping_add(3i32 as libc::c_uint) as size_t;
     return if 0 != maxSymbolValue {
-               maxHeaderSize
-           } else { 512i32 as libc::c_ulong };
+        maxHeaderSize
+    } else {
+        512i32 as libc::c_ulong
+    };
 }
 /* ! FSE_normalizeCount():
-    normalize counts so that sum(count[]) == Power_of_2 (2^tableLog)
-    'normalizedCounter' is a table of short, of minimum size (maxSymbolValue+1).
-    @return : tableLog,
-              or an errorCode, which can be tested using FSE_isError() */
+normalize counts so that sum(count[]) == Power_of_2 (2^tableLog)
+'normalizedCounter' is a table of short, of minimum size (maxSymbolValue+1).
+@return : tableLog,
+          or an errorCode, which can be tested using FSE_isError() */
 #[no_mangle]
-pub unsafe extern "C" fn FSE_normalizeCount(mut normalizedCounter:
-                                                *mut libc::c_short,
-                                            mut tableLog: libc::c_uint,
-                                            mut count: *const libc::c_uint,
-                                            mut total: size_t,
-                                            mut maxSymbolValue: libc::c_uint)
- -> size_t {
+pub unsafe extern "C" fn FSE_normalizeCount(
+    mut normalizedCounter: *mut libc::c_short,
+    mut tableLog: libc::c_uint,
+    mut count: *const libc::c_uint,
+    mut total: size_t,
+    mut maxSymbolValue: libc::c_uint,
+) -> size_t {
     if tableLog == 0i32 as libc::c_uint {
         tableLog = (13i32 - 2i32) as libc::c_uint
     }
     if tableLog < 5i32 as libc::c_uint {
-        return -(FSE_error_GENERIC as libc::c_int) as size_t
+        return -(FSE_error_GENERIC as libc::c_int) as size_t;
     }
     if tableLog > (14i32 - 2i32) as libc::c_uint {
-        return -(FSE_error_tableLog_tooLarge as libc::c_int) as size_t
+        return -(FSE_error_tableLog_tooLarge as libc::c_int) as size_t;
     }
     if tableLog < FSE_minTableLog(total, maxSymbolValue) {
-        return -(FSE_error_GENERIC as libc::c_int) as size_t
+        return -(FSE_error_GENERIC as libc::c_int) as size_t;
     }
-    static mut rtbTable: [U32; 8] =
-        [0i32 as U32, 473195i32 as U32, 504333i32 as U32, 520860i32 as U32,
-         550000i32 as U32, 700000i32 as U32, 750000i32 as U32,
-         830000i32 as U32];
+    static mut rtbTable: [U32; 8] = [
+        0i32 as U32,
+        473195i32 as U32,
+        504333i32 as U32,
+        520860i32 as U32,
+        550000i32 as U32,
+        700000i32 as U32,
+        750000i32 as U32,
+        830000i32 as U32,
+    ];
     let scale: U64 = (62i32 as libc::c_uint).wrapping_sub(tableLog) as U64;
-    let step: U64 =
-        ((1i32 as U64) << 62i32).wrapping_div(total as libc::c_ulonglong);
+    let step: U64 = ((1i32 as U64) << 62i32).wrapping_div(total as libc::c_ulonglong);
     let vStep: U64 = 1u64 << scale.wrapping_sub(20i32 as libc::c_ulonglong);
     let mut stillToDistribute: libc::c_int = 1i32 << tableLog;
     let mut s: libc::c_uint = 0;
@@ -1142,7 +1217,7 @@ pub unsafe extern "C" fn FSE_normalizeCount(mut normalizedCounter:
     s = 0i32 as libc::c_uint;
     while s <= maxSymbolValue {
         if *count.offset(s as isize) as libc::c_ulong == total {
-            return 0i32 as size_t
+            return 0i32 as size_t;
         }
         if *count.offset(s as isize) == 0i32 as libc::c_uint {
             *normalizedCounter.offset(s as isize) = 0i32 as libc::c_short
@@ -1150,23 +1225,17 @@ pub unsafe extern "C" fn FSE_normalizeCount(mut normalizedCounter:
             *normalizedCounter.offset(s as isize) = -1i32 as libc::c_short;
             stillToDistribute -= 1
         } else {
-            let mut proba: libc::c_short =
-                ((*count.offset(s as isize) as
-                      libc::c_ulonglong).wrapping_mul(step) >> scale) as
-                    libc::c_short;
+            let mut proba: libc::c_short = ((*count.offset(s as isize) as libc::c_ulonglong)
+                .wrapping_mul(step)
+                >> scale) as libc::c_short;
             if (proba as libc::c_int) < 8i32 {
                 let mut restToBeat: U64 =
-                    vStep.wrapping_mul(rtbTable[proba as usize] as
-                                           libc::c_ulonglong);
-                proba =
-                    (proba as libc::c_int +
-                         ((*count.offset(s as isize) as
-                               libc::c_ulonglong).wrapping_mul(step).wrapping_sub((proba
-                                                                                       as
-                                                                                       U64)
-                                                                                      <<
-                                                                                      scale)
-                              > restToBeat) as libc::c_int) as libc::c_short
+                    vStep.wrapping_mul(rtbTable[proba as usize] as libc::c_ulonglong);
+                proba = (proba as libc::c_int
+                    + ((*count.offset(s as isize) as libc::c_ulonglong)
+                        .wrapping_mul(step)
+                        .wrapping_sub((proba as U64) << scale)
+                        > restToBeat) as libc::c_int) as libc::c_short
             }
             if proba as libc::c_int > largestP as libc::c_int {
                 largestP = proba;
@@ -1177,38 +1246,36 @@ pub unsafe extern "C" fn FSE_normalizeCount(mut normalizedCounter:
         }
         s = s.wrapping_add(1)
     }
-    if -stillToDistribute >=
-           *normalizedCounter.offset(largest as isize) as libc::c_int >> 1i32
-       {
+    if -stillToDistribute >= *normalizedCounter.offset(largest as isize) as libc::c_int >> 1i32 {
         let errorCode: size_t =
-            FSE_normalizeM2(normalizedCounter, tableLog, count, total,
-                            maxSymbolValue);
-        if 0 != ERR_isError(errorCode) { return errorCode }
+            FSE_normalizeM2(normalizedCounter, tableLog, count, total, maxSymbolValue);
+        if 0 != ERR_isError(errorCode) {
+            return errorCode;
+        }
     } else {
         let ref mut fresh3 = *normalizedCounter.offset(largest as isize);
-        *fresh3 =
-            (*fresh3 as libc::c_int +
-                 stillToDistribute as libc::c_short as libc::c_int) as
-                libc::c_short
+        *fresh3 = (*fresh3 as libc::c_int + stillToDistribute as libc::c_short as libc::c_int)
+            as libc::c_short
     }
     return tableLog as size_t;
 }
 /* Secondary normalization method.
-   To be used when primary method fails. */
-unsafe extern "C" fn FSE_normalizeM2(mut norm: *mut libc::c_short,
-                                     mut tableLog: U32,
-                                     mut count: *const libc::c_uint,
-                                     mut total: size_t,
-                                     mut maxSymbolValue: U32) -> size_t {
+To be used when primary method fails. */
+unsafe extern "C" fn FSE_normalizeM2(
+    mut norm: *mut libc::c_short,
+    mut tableLog: U32,
+    mut count: *const libc::c_uint,
+    mut total: size_t,
+    mut maxSymbolValue: U32,
+) -> size_t {
     let NOT_YET_ASSIGNED: libc::c_short = -2i32 as libc::c_short;
     let mut s: U32 = 0;
     let mut distributed: U32 = 0i32 as U32;
     let mut ToDistribute: U32 = 0;
     /* Init */
     let lowThreshold: U32 = (total >> tableLog) as U32;
-    let mut lowOne: U32 =
-        (total.wrapping_mul(3i32 as libc::c_ulong) >>
-             tableLog.wrapping_add(1i32 as libc::c_uint)) as U32;
+    let mut lowOne: U32 = (total.wrapping_mul(3i32 as libc::c_ulong)
+        >> tableLog.wrapping_add(1i32 as libc::c_uint)) as U32;
     s = 0i32 as U32;
     while s <= maxSymbolValue {
         if *count.offset(s as isize) == 0i32 as libc::c_uint {
@@ -1216,51 +1283,40 @@ unsafe extern "C" fn FSE_normalizeM2(mut norm: *mut libc::c_short,
         } else if *count.offset(s as isize) <= lowThreshold {
             *norm.offset(s as isize) = -1i32 as libc::c_short;
             distributed = distributed.wrapping_add(1);
-            total =
-                (total as
-                     libc::c_ulong).wrapping_sub(*count.offset(s as isize) as
-                                                     libc::c_ulong) as size_t
-                    as size_t
+            total = (total as libc::c_ulong)
+                .wrapping_sub(*count.offset(s as isize) as libc::c_ulong)
+                as size_t as size_t
         } else if *count.offset(s as isize) <= lowOne {
             *norm.offset(s as isize) = 1i32 as libc::c_short;
             distributed = distributed.wrapping_add(1);
-            total =
-                (total as
-                     libc::c_ulong).wrapping_sub(*count.offset(s as isize) as
-                                                     libc::c_ulong) as size_t
-                    as size_t
-        } else { *norm.offset(s as isize) = NOT_YET_ASSIGNED }
+            total = (total as libc::c_ulong)
+                .wrapping_sub(*count.offset(s as isize) as libc::c_ulong)
+                as size_t as size_t
+        } else {
+            *norm.offset(s as isize) = NOT_YET_ASSIGNED
+        }
         s = s.wrapping_add(1)
     }
-    ToDistribute =
-        ((1i32 << tableLog) as libc::c_uint).wrapping_sub(distributed);
-    if total.wrapping_div(ToDistribute as libc::c_ulong) >
-           lowOne as libc::c_ulong {
-        lowOne =
-            total.wrapping_mul(3i32 as
-                                   libc::c_ulong).wrapping_div(ToDistribute.wrapping_mul(2i32
-                                                                                             as
-                                                                                             libc::c_uint)
-                                                                   as
-                                                                   libc::c_ulong)
-                as U32;
+    ToDistribute = ((1i32 << tableLog) as libc::c_uint).wrapping_sub(distributed);
+    if total.wrapping_div(ToDistribute as libc::c_ulong) > lowOne as libc::c_ulong {
+        lowOne = total
+            .wrapping_mul(3i32 as libc::c_ulong)
+            .wrapping_div(ToDistribute.wrapping_mul(2i32 as libc::c_uint) as libc::c_ulong)
+            as U32;
         s = 0i32 as U32;
         while s <= maxSymbolValue {
-            if *norm.offset(s as isize) as libc::c_int ==
-                   NOT_YET_ASSIGNED as libc::c_int &&
-                   *count.offset(s as isize) <= lowOne {
+            if *norm.offset(s as isize) as libc::c_int == NOT_YET_ASSIGNED as libc::c_int
+                && *count.offset(s as isize) <= lowOne
+            {
                 *norm.offset(s as isize) = 1i32 as libc::c_short;
                 distributed = distributed.wrapping_add(1);
-                total =
-                    (total as
-                         libc::c_ulong).wrapping_sub(*count.offset(s as isize)
-                                                         as libc::c_ulong) as
-                        size_t as size_t
+                total = (total as libc::c_ulong)
+                    .wrapping_sub(*count.offset(s as isize) as libc::c_ulong)
+                    as size_t as size_t
             }
             s = s.wrapping_add(1)
         }
-        ToDistribute =
-            ((1i32 << tableLog) as libc::c_uint).wrapping_sub(distributed)
+        ToDistribute = ((1i32 << tableLog) as libc::c_uint).wrapping_sub(distributed)
     }
     if distributed == maxSymbolValue.wrapping_add(1i32 as libc::c_uint) {
         let mut maxV: U32 = 0i32 as U32;
@@ -1274,11 +1330,9 @@ unsafe extern "C" fn FSE_normalizeM2(mut norm: *mut libc::c_short,
             s = s.wrapping_add(1)
         }
         let ref mut fresh4 = *norm.offset(maxV as isize);
-        *fresh4 =
-            (*fresh4 as libc::c_int +
-                 ToDistribute as libc::c_short as libc::c_int) as
-                libc::c_short;
-        return 0i32 as size_t
+        *fresh4 = (*fresh4 as libc::c_int + ToDistribute as libc::c_short as libc::c_int)
+            as libc::c_short;
+        return 0i32 as size_t;
     }
     if total == 0i32 as libc::c_ulong {
         s = 0i32 as U32;
@@ -1288,40 +1342,30 @@ unsafe extern "C" fn FSE_normalizeM2(mut norm: *mut libc::c_short,
                 let ref mut fresh5 = *norm.offset(s as isize);
                 *fresh5 += 1
             }
-            s =
-                s.wrapping_add(1i32 as
-                                   libc::c_uint).wrapping_rem(maxSymbolValue.wrapping_add(1i32
-                                                                                              as
-                                                                                              libc::c_uint))
+            s = s
+                .wrapping_add(1i32 as libc::c_uint)
+                .wrapping_rem(maxSymbolValue.wrapping_add(1i32 as libc::c_uint))
         }
-        return 0i32 as size_t
+        return 0i32 as size_t;
     }
     let vStepLog: U64 = (62i32 as libc::c_uint).wrapping_sub(tableLog) as U64;
-    let mid: U64 =
-        (1u64 <<
-             vStepLog.wrapping_sub(1i32 as
-                                       libc::c_ulonglong)).wrapping_sub(1i32
-                                                                            as
-                                                                            libc::c_ulonglong);
-    let rStep: U64 =
-        ((1i32 as U64) <<
-             vStepLog).wrapping_mul(ToDistribute as
-                                        libc::c_ulonglong).wrapping_add(mid).wrapping_div(total
-                                                                                              as
-                                                                                              libc::c_ulonglong);
+    let mid: U64 = (1u64 << vStepLog.wrapping_sub(1i32 as libc::c_ulonglong))
+        .wrapping_sub(1i32 as libc::c_ulonglong);
+    let rStep: U64 = ((1i32 as U64) << vStepLog)
+        .wrapping_mul(ToDistribute as libc::c_ulonglong)
+        .wrapping_add(mid)
+        .wrapping_div(total as libc::c_ulonglong);
     let mut tmpTotal: U64 = mid;
     s = 0i32 as U32;
     while s <= maxSymbolValue {
-        if *norm.offset(s as isize) as libc::c_int ==
-               NOT_YET_ASSIGNED as libc::c_int {
-            let end: U64 =
-                tmpTotal.wrapping_add((*count.offset(s as isize) as
-                                           libc::c_ulonglong).wrapping_mul(rStep));
+        if *norm.offset(s as isize) as libc::c_int == NOT_YET_ASSIGNED as libc::c_int {
+            let end: U64 = tmpTotal
+                .wrapping_add((*count.offset(s as isize) as libc::c_ulonglong).wrapping_mul(rStep));
             let sStart: U32 = (tmpTotal >> vStepLog) as U32;
             let sEnd: U32 = (end >> vStepLog) as U32;
             let weight: U32 = sEnd.wrapping_sub(sStart);
             if weight < 1i32 as libc::c_uint {
-                return -(FSE_error_GENERIC as libc::c_int) as size_t
+                return -(FSE_error_GENERIC as libc::c_int) as size_t;
             }
             *norm.offset(s as isize) = weight as libc::c_short;
             tmpTotal = end
@@ -1331,16 +1375,18 @@ unsafe extern "C" fn FSE_normalizeM2(mut norm: *mut libc::c_short,
     return 0i32 as size_t;
 }
 /* provides the minimum logSize to safely represent a distribution */
-unsafe extern "C" fn FSE_minTableLog(mut srcSize: size_t,
-                                     mut maxSymbolValue: libc::c_uint)
- -> libc::c_uint {
-    let mut minBitsSrc: U32 =
-        BIT_highbit32(srcSize.wrapping_sub(1i32 as libc::c_ulong) as
-                          U32).wrapping_add(1i32 as libc::c_uint);
-    let mut minBitsSymbols: U32 =
-        BIT_highbit32(maxSymbolValue).wrapping_add(2i32 as libc::c_uint);
-    let mut minBits: U32 =
-        if minBitsSrc < minBitsSymbols { minBitsSrc } else { minBitsSymbols };
+unsafe extern "C" fn FSE_minTableLog(
+    mut srcSize: size_t,
+    mut maxSymbolValue: libc::c_uint,
+) -> libc::c_uint {
+    let mut minBitsSrc: U32 = BIT_highbit32(srcSize.wrapping_sub(1i32 as libc::c_ulong) as U32)
+        .wrapping_add(1i32 as libc::c_uint);
+    let mut minBitsSymbols: U32 = BIT_highbit32(maxSymbolValue).wrapping_add(2i32 as libc::c_uint);
+    let mut minBits: U32 = if minBitsSrc < minBitsSymbols {
+        minBitsSrc
+    } else {
+        minBitsSymbols
+    };
     return minBits;
 }
 /*-*****************************************
@@ -1365,16 +1411,16 @@ or to save and provide normalized distribution using external method.
 */
 /* *** COMPRESSION *** */
 /* ! FSE_optimalTableLog():
-    dynamically downsize 'tableLog' when conditions are met.
-    It saves CPU time, by using smaller tables, while preserving or even improving compression ratio.
-    @return : recommended tableLog (necessarily <= 'maxTableLog') */
+dynamically downsize 'tableLog' when conditions are met.
+It saves CPU time, by using smaller tables, while preserving or even improving compression ratio.
+@return : recommended tableLog (necessarily <= 'maxTableLog') */
 #[no_mangle]
-pub unsafe extern "C" fn FSE_optimalTableLog(mut maxTableLog: libc::c_uint,
-                                             mut srcSize: size_t,
-                                             mut maxSymbolValue: libc::c_uint)
- -> libc::c_uint {
-    return FSE_optimalTableLog_internal(maxTableLog, srcSize, maxSymbolValue,
-                                        2i32 as libc::c_uint);
+pub unsafe extern "C" fn FSE_optimalTableLog(
+    mut maxTableLog: libc::c_uint,
+    mut srcSize: size_t,
+    mut maxSymbolValue: libc::c_uint,
+) -> libc::c_uint {
+    return FSE_optimalTableLog_internal(maxTableLog, srcSize, maxSymbolValue, 2i32 as libc::c_uint);
 }
 /* !
 Tutorial :
@@ -1416,22 +1462,28 @@ If there is an error, the function will return an error code, which can be teste
  *  FSE advanced API
  ***************************************** */
 #[no_mangle]
-pub unsafe extern "C" fn FSE_optimalTableLog_internal(mut maxTableLog:
-                                                          libc::c_uint,
-                                                      mut srcSize: size_t,
-                                                      mut maxSymbolValue:
-                                                          libc::c_uint,
-                                                      mut minus: libc::c_uint)
- -> libc::c_uint {
+pub unsafe extern "C" fn FSE_optimalTableLog_internal(
+    mut maxTableLog: libc::c_uint,
+    mut srcSize: size_t,
+    mut maxSymbolValue: libc::c_uint,
+    mut minus: libc::c_uint,
+) -> libc::c_uint {
     let mut maxBitsSrc: U32 =
-        BIT_highbit32(srcSize.wrapping_sub(1i32 as libc::c_ulong) as
-                          U32).wrapping_sub(minus);
+        BIT_highbit32(srcSize.wrapping_sub(1i32 as libc::c_ulong) as U32).wrapping_sub(minus);
     let mut tableLog: U32 = maxTableLog;
     let mut minBits: U32 = FSE_minTableLog(srcSize, maxSymbolValue);
-    if tableLog == 0i32 as libc::c_uint { tableLog = (13i32 - 2i32) as U32 }
-    if maxBitsSrc < tableLog { tableLog = maxBitsSrc }
-    if minBits > tableLog { tableLog = minBits }
-    if tableLog < 5i32 as libc::c_uint { tableLog = 5i32 as U32 }
+    if tableLog == 0i32 as libc::c_uint {
+        tableLog = (13i32 - 2i32) as U32
+    }
+    if maxBitsSrc < tableLog {
+        tableLog = maxBitsSrc
+    }
+    if minBits > tableLog {
+        tableLog = minBits
+    }
+    if tableLog < 5i32 as libc::c_uint {
+        tableLog = 5i32 as U32
+    }
     if tableLog > (14i32 - 2i32) as libc::c_uint {
         tableLog = (14i32 - 2i32) as U32
     }
@@ -1443,24 +1495,24 @@ pub unsafe extern "C" fn FSE_optimalTableLog_internal(mut maxTableLog:
 /* maximum compressed size */
 #[no_mangle]
 pub unsafe extern "C" fn FSE_compressBound(mut size: size_t) -> size_t {
-    return (512i32 as
-                libc::c_ulong).wrapping_add(size.wrapping_add(size >> 7i32));
+    return (512i32 as libc::c_ulong).wrapping_add(size.wrapping_add(size >> 7i32));
 }
 #[no_mangle]
-pub unsafe extern "C" fn FSE_createCTable(mut maxSymbolValue: libc::c_uint,
-                                          mut tableLog: libc::c_uint)
- -> *mut FSE_CTable {
+pub unsafe extern "C" fn FSE_createCTable(
+    mut maxSymbolValue: libc::c_uint,
+    mut tableLog: libc::c_uint,
+) -> *mut FSE_CTable {
     let mut size: size_t = 0;
-    if tableLog > 15i32 as libc::c_uint { tableLog = 15i32 as libc::c_uint }
-    size =
-        (((1i32 + (1i32 << tableLog.wrapping_sub(1i32 as libc::c_uint))) as
-              libc::c_uint).wrapping_add(maxSymbolValue.wrapping_add(1i32 as
-                                                                         libc::c_uint).wrapping_mul(2i32
-                                                                                                        as
-                                                                                                        libc::c_uint))
-             as
-             libc::c_ulong).wrapping_mul(::std::mem::size_of::<U32>() as
-                                             libc::c_ulong);
+    if tableLog > 15i32 as libc::c_uint {
+        tableLog = 15i32 as libc::c_uint
+    }
+    size = (((1i32 + (1i32 << tableLog.wrapping_sub(1i32 as libc::c_uint))) as libc::c_uint)
+        .wrapping_add(
+            maxSymbolValue
+                .wrapping_add(1i32 as libc::c_uint)
+                .wrapping_mul(2i32 as libc::c_uint),
+        ) as libc::c_ulong)
+        .wrapping_mul(::std::mem::size_of::<U32>() as libc::c_ulong);
     return malloc(size) as *mut FSE_CTable;
 }
 #[no_mangle]
@@ -1468,43 +1520,46 @@ pub unsafe extern "C" fn FSE_freeCTable(mut ct: *mut FSE_CTable) {
     free(ct as *mut libc::c_void);
 }
 /* ! FSE_buildCTable():
-    Builds `ct`, which must be already allocated, using FSE_createCTable().
-    @return : 0, or an errorCode, which can be tested using FSE_isError() */
+Builds `ct`, which must be already allocated, using FSE_createCTable().
+@return : 0, or an errorCode, which can be tested using FSE_isError() */
 #[no_mangle]
-pub unsafe extern "C" fn FSE_buildCTable(mut ct: *mut FSE_CTable,
-                                         mut normalizedCounter:
-                                             *const libc::c_short,
-                                         mut maxSymbolValue: libc::c_uint,
-                                         mut tableLog: libc::c_uint)
- -> size_t {
+pub unsafe extern "C" fn FSE_buildCTable(
+    mut ct: *mut FSE_CTable,
+    mut normalizedCounter: *const libc::c_short,
+    mut maxSymbolValue: libc::c_uint,
+    mut tableLog: libc::c_uint,
+) -> size_t {
     /* memset() is not necessary, even if static analyzer complain about it */
     let mut tableSymbol: [BYTE; 4096] = [0; 4096];
-    return FSE_buildCTable_wksp(ct, normalizedCounter, maxSymbolValue,
-                                tableLog,
-                                tableSymbol.as_mut_ptr() as *mut libc::c_void,
-                                ::std::mem::size_of::<[BYTE; 4096]>() as
-                                    libc::c_ulong);
+    return FSE_buildCTable_wksp(
+        ct,
+        normalizedCounter,
+        maxSymbolValue,
+        tableLog,
+        tableSymbol.as_mut_ptr() as *mut libc::c_void,
+        ::std::mem::size_of::<[BYTE; 4096]>() as libc::c_ulong,
+    );
 }
 #[no_mangle]
-pub unsafe extern "C" fn FSE_buildCTable_raw(mut ct: *mut FSE_CTable,
-                                             mut nbBits: libc::c_uint)
- -> size_t {
+pub unsafe extern "C" fn FSE_buildCTable_raw(
+    mut ct: *mut FSE_CTable,
+    mut nbBits: libc::c_uint,
+) -> size_t {
     let tableSize: libc::c_uint = (1i32 << nbBits) as libc::c_uint;
-    let tableMask: libc::c_uint =
-        tableSize.wrapping_sub(1i32 as libc::c_uint);
+    let tableMask: libc::c_uint = tableSize.wrapping_sub(1i32 as libc::c_uint);
     let maxSymbolValue: libc::c_uint = tableMask;
     let ptr: *mut libc::c_void = ct as *mut libc::c_void;
     let tableU16: *mut U16 = (ptr as *mut U16).offset(2isize);
     /* header */
     /* assumption : tableLog >= 1 */
-    let FSCT: *mut libc::c_void =
-        (ptr as *mut U32).offset(1isize).offset((tableSize >> 1i32) as isize)
-            as *mut libc::c_void;
-    let symbolTT: *mut FSE_symbolCompressionTransform =
-        FSCT as *mut FSE_symbolCompressionTransform;
+    let FSCT: *mut libc::c_void = (ptr as *mut U32)
+        .offset(1isize)
+        .offset((tableSize >> 1i32) as isize)
+        as *mut libc::c_void;
+    let symbolTT: *mut FSE_symbolCompressionTransform = FSCT as *mut FSE_symbolCompressionTransform;
     let mut s: libc::c_uint = 0;
     if nbBits < 1i32 as libc::c_uint {
-        return -(FSE_error_GENERIC as libc::c_int) as size_t
+        return -(FSE_error_GENERIC as libc::c_int) as size_t;
     }
     *tableU16.offset(-2i32 as isize) = nbBits as U16;
     *tableU16.offset(-1i32 as isize) = maxSymbolValue as U16;
@@ -1513,8 +1568,7 @@ pub unsafe extern "C" fn FSE_buildCTable_raw(mut ct: *mut FSE_CTable,
         *tableU16.offset(s as isize) = tableSize.wrapping_add(s) as U16;
         s = s.wrapping_add(1)
     }
-    let deltaNbBits: U32 =
-        (nbBits << 16i32).wrapping_sub((1i32 << nbBits) as libc::c_uint);
+    let deltaNbBits: U32 = (nbBits << 16i32).wrapping_sub((1i32 << nbBits) as libc::c_uint);
     s = 0i32 as libc::c_uint;
     while s <= maxSymbolValue {
         (*symbolTT.offset(s as isize)).deltaNbBits = deltaNbBits;
@@ -1526,13 +1580,13 @@ pub unsafe extern "C" fn FSE_buildCTable_raw(mut ct: *mut FSE_CTable,
 }
 /* *< build a fake FSE_CTable, designed for a flat distribution, where each symbol uses nbBits */
 #[no_mangle]
-pub unsafe extern "C" fn FSE_buildCTable_rle(mut ct: *mut FSE_CTable,
-                                             mut symbolValue: BYTE)
- -> size_t {
+pub unsafe extern "C" fn FSE_buildCTable_rle(
+    mut ct: *mut FSE_CTable,
+    mut symbolValue: BYTE,
+) -> size_t {
     let mut ptr: *mut libc::c_void = ct as *mut libc::c_void;
     let mut tableU16: *mut U16 = (ptr as *mut U16).offset(2isize);
-    let mut FSCTptr: *mut libc::c_void =
-        (ptr as *mut U32).offset(2isize) as *mut libc::c_void;
+    let mut FSCTptr: *mut libc::c_void = (ptr as *mut U32).offset(2isize) as *mut libc::c_void;
     let mut symbolTT: *mut FSE_symbolCompressionTransform =
         FSCTptr as *mut FSE_symbolCompressionTransform;
     *tableU16.offset(-2i32 as isize) = 0i32 as U16;
@@ -1555,19 +1609,18 @@ pub unsafe extern "C" fn FSE_buildCTable_rle(mut ct: *mut FSE_CTable,
 Allocation is manual (C standard does not support variable-size structures).
 */
 #[no_mangle]
-pub unsafe extern "C" fn FSE_sizeof_CTable(mut maxSymbolValue: libc::c_uint,
-                                           mut tableLog: libc::c_uint)
- -> size_t {
+pub unsafe extern "C" fn FSE_sizeof_CTable(
+    mut maxSymbolValue: libc::c_uint,
+    mut tableLog: libc::c_uint,
+) -> size_t {
     if tableLog > (14i32 - 2i32) as libc::c_uint {
-        return -(FSE_error_tableLog_tooLarge as libc::c_int) as size_t
+        return -(FSE_error_tableLog_tooLarge as libc::c_int) as size_t;
     }
-    return (((1i32 + (1i32 << tableLog.wrapping_sub(1i32 as libc::c_uint))) as
-                 libc::c_uint).wrapping_add(maxSymbolValue.wrapping_add(1i32
-                                                                            as
-                                                                            libc::c_uint).wrapping_mul(2i32
-                                                                                                           as
-                                                                                                           libc::c_uint))
-                as
-                libc::c_ulong).wrapping_mul(::std::mem::size_of::<U32>() as
-                                                libc::c_ulong);
+    return (((1i32 + (1i32 << tableLog.wrapping_sub(1i32 as libc::c_uint))) as libc::c_uint)
+        .wrapping_add(
+            maxSymbolValue
+                .wrapping_add(1i32 as libc::c_uint)
+                .wrapping_mul(2i32 as libc::c_uint),
+        ) as libc::c_ulong)
+        .wrapping_mul(::std::mem::size_of::<U32>() as libc::c_ulong);
 }
