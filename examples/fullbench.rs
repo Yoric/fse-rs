@@ -1,4 +1,3 @@
-
 #![allow(
     dead_code,
     mutable_transmutes,
@@ -9,8 +8,8 @@
 )]
 #![feature(asm, extern_types, libc)]
 
-extern crate fse_rs;
 extern crate core;
+extern crate fse_rs;
 extern crate libc;
 use fse_rs::converted::*;
 

@@ -14,8 +14,8 @@ pub mod _uint32_t_h {
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/mem.h"]
 pub mod mem_h {
     /*-**************************************************************
-    *  Basic Types
-    *****************************************************************/
+     *  Basic Types
+     *****************************************************************/
     /* C99 */
     pub type BYTE = uint8_t;
     pub type U32 = uint32_t;

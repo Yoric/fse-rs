@@ -31,8 +31,8 @@ pub mod _uint64_t_h {
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/mem.h"]
 pub mod mem_h {
     /*-**************************************************************
-    *  Basic Types
-    *****************************************************************/
+     *  Basic Types
+     *****************************************************************/
     /* C99 */
     pub type BYTE = uint8_t;
     pub type U16 = uint16_t;
@@ -114,24 +114,24 @@ pub mod error_public_h {
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/bitstream.h"]
 pub mod bitstream_h {
     /* Start with initCStream, providing the size of buffer to write into.
-    *  bitStream will never write outside of this buffer.
-    *  `dstCapacity` must be >= sizeof(bitD->bitContainer), otherwise @return will be an error code.
-    *
-    *  bits are first added to a local register.
-    *  Local register is size_t, hence 64-bits on 64-bits systems, or 32-bits on 32-bits systems.
-    *  Writing data into memory is an explicit operation, performed by the flushBits function.
-    *  Hence keep track how many bits are potentially stored into local register to avoid register overflow.
-    *  After a flushBits, a maximum of 7 bits might still be stored into local register.
-    *
-    *  Avoid storing elements of more than 24 bits if you want compatibility with 32-bits bitstream readers.
-    *
-    *  Last operation is to close the bitStream.
-    *  The function returns the final size of CStream in bytes.
-    *  If data couldn't fit into `dstBuffer`, it will return a 0 ( == not storable)
-    */
+     *  bitStream will never write outside of this buffer.
+     *  `dstCapacity` must be >= sizeof(bitD->bitContainer), otherwise @return will be an error code.
+     *
+     *  bits are first added to a local register.
+     *  Local register is size_t, hence 64-bits on 64-bits systems, or 32-bits on 32-bits systems.
+     *  Writing data into memory is an explicit operation, performed by the flushBits function.
+     *  Hence keep track how many bits are potentially stored into local register to avoid register overflow.
+     *  After a flushBits, a maximum of 7 bits might still be stored into local register.
+     *
+     *  Avoid storing elements of more than 24 bits if you want compatibility with 32-bits bitstream readers.
+     *
+     *  Last operation is to close the bitStream.
+     *  The function returns the final size of CStream in bytes.
+     *  If data couldn't fit into `dstBuffer`, it will return a 0 ( == not storable)
+     */
     /*-********************************************
-    *  bitStream decoding API (read backward)
-    **********************************************/
+     *  bitStream decoding API (read backward)
+     **********************************************/
     #[derive(Copy, Clone)]
     #[repr(C)]
     pub struct BIT_DStream_t {
@@ -197,8 +197,8 @@ pub mod fse_h {
         size_t size = BIT_closeCStream(&bitStream);
     */
     /* *****************************************
-    *  FSE symbol decompression API
-    *******************************************/
+     *  FSE symbol decompression API
+     *******************************************/
     #[derive(Copy, Clone)]
     #[repr(C)]
     pub struct FSE_DState_t {

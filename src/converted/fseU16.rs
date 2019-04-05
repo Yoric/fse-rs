@@ -7,8 +7,8 @@ pub mod stddef_h {
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/mem.h"]
 pub mod mem_h {
     /*-**************************************************************
-    *  Basic Types
-    *****************************************************************/
+     *  Basic Types
+     *****************************************************************/
     /* C99 */
     pub type BYTE = uint8_t;
     pub type U16 = uint16_t;
@@ -39,16 +39,16 @@ pub mod mem_h {
         Note that FSE_CTable size depends on 'tableLog' and 'maxSymbolValue' */
         /* don't allocate that. It's only meant to be more restrictive than void* */
         /* *****************************************
-        *  FSE symbol compression API
-        *******************************************/
+         *  FSE symbol compression API
+         *******************************************/
         /*
            This API consists of small unitary functions, which highly benefit from being inlined.
            Hence their body are included in next section.
         */
         /* faster, but works only if nbBits is always >= 1 (otherwise, result will be corrupted) */
         /* *****************************************
-        *  Implementation of inlined functions
-        *******************************************/
+         *  Implementation of inlined functions
+         *******************************************/
         /* ! Constructor and Destructor of FSE_DTable.
         Note that its size depends on 'tableLog' */
         /* don't allocate that. It's just a way to be more restrictive than void* */
@@ -130,8 +130,8 @@ pub mod fse_h {
         size_t size = BIT_closeCStream(&bitStream);
     */
     /* *****************************************
-    *  FSE symbol decompression API
-    *******************************************/
+     *  FSE symbol decompression API
+     *******************************************/
     #[derive(Copy, Clone)]
     #[repr(C)]
     pub struct FSE_DState_t {
@@ -152,8 +152,8 @@ pub mod fse_h {
         @return : tableLog,
                   or an errorCode, which can be tested using FSE_isError() */
         /*-*****************************************
-        *  FSE detailed API
-        ******************************************/
+         *  FSE detailed API
+         ******************************************/
         /*
         FSE_compress() does the following:
         1. count symbol occurrence from source[] into table count[] (see hist.h)
@@ -218,21 +218,21 @@ pub mod bitstream_h {
        - Source repository : https://github.com/Cyan4973/FiniteStateEntropy
     ****************************************************************** */
     /*
-    *  This API consists of small unitary functions, which must be inlined for best performance.
-    *  Since link-time-optimization is not available for all compilers,
-    *  these functions are defined into a .h to be included.
-    */
+     *  This API consists of small unitary functions, which must be inlined for best performance.
+     *  Since link-time-optimization is not available for all compilers,
+     *  these functions are defined into a .h to be included.
+     */
     /*-****************************************
-    *  Dependencies
-    ******************************************/
+     *  Dependencies
+     ******************************************/
     /* unaligned access routines */
     /* assert(), DEBUGLOG(), RAWLOG() */
     /*=========================================
     *  Target specific
     =========================================*/
     /*-******************************************
-    *  bitStream encoding API (write forward)
-    ********************************************/
+     *  bitStream encoding API (write forward)
+     ********************************************/
     /* bitStream can mix input from multiple sources.
      * A critical property of these streams is that they encode and decode in **reverse** direction.
      * So the first bit sequence you add will be the last to be read, like a LIFO stack.
@@ -249,24 +249,24 @@ pub mod bitstream_h {
     pub type unnamed_0 = libc::c_uint;
     pub const MEM_static_assert: unnamed_0 = 1;
     /* Start with initCStream, providing the size of buffer to write into.
-    *  bitStream will never write outside of this buffer.
-    *  `dstCapacity` must be >= sizeof(bitD->bitContainer), otherwise @return will be an error code.
-    *
-    *  bits are first added to a local register.
-    *  Local register is size_t, hence 64-bits on 64-bits systems, or 32-bits on 32-bits systems.
-    *  Writing data into memory is an explicit operation, performed by the flushBits function.
-    *  Hence keep track how many bits are potentially stored into local register to avoid register overflow.
-    *  After a flushBits, a maximum of 7 bits might still be stored into local register.
-    *
-    *  Avoid storing elements of more than 24 bits if you want compatibility with 32-bits bitstream readers.
-    *
-    *  Last operation is to close the bitStream.
-    *  The function returns the final size of CStream in bytes.
-    *  If data couldn't fit into `dstBuffer`, it will return a 0 ( == not storable)
-    */
+     *  bitStream will never write outside of this buffer.
+     *  `dstCapacity` must be >= sizeof(bitD->bitContainer), otherwise @return will be an error code.
+     *
+     *  bits are first added to a local register.
+     *  Local register is size_t, hence 64-bits on 64-bits systems, or 32-bits on 32-bits systems.
+     *  Writing data into memory is an explicit operation, performed by the flushBits function.
+     *  Hence keep track how many bits are potentially stored into local register to avoid register overflow.
+     *  After a flushBits, a maximum of 7 bits might still be stored into local register.
+     *
+     *  Avoid storing elements of more than 24 bits if you want compatibility with 32-bits bitstream readers.
+     *
+     *  Last operation is to close the bitStream.
+     *  The function returns the final size of CStream in bytes.
+     *  If data couldn't fit into `dstBuffer`, it will return a 0 ( == not storable)
+     */
     /*-********************************************
-    *  bitStream decoding API (read backward)
-    **********************************************/
+     *  bitStream decoding API (read backward)
+     **********************************************/
     #[derive(Copy, Clone)]
     #[repr(C)]
     pub struct BIT_DStream_t {
@@ -382,23 +382,23 @@ pub mod fseU16_c {
        - Public forum : https://groups.google.com/forum/#!forum/lz4c
     ****************************************************************** */
     /* *************************************************************
-    *  Tuning parameters
-    *****************************************************************/
+     *  Tuning parameters
+     *****************************************************************/
     /* MEMORY_USAGE :
-    *  Memory usage formula : N->2^N Bytes (examples : 10 -> 1KB; 12 -> 4KB ; 16 -> 64KB; 20 -> 1MB; etc.)
-    *  Increasing memory usage improves compression ratio
-    *  Reduced memory usage can improve speed, due to cache effect
-    *  Recommended max value is 14, for 16KB, which nicely fits into Intel x86 L1 cache */
+     *  Memory usage formula : N->2^N Bytes (examples : 10 -> 1KB; 12 -> 4KB ; 16 -> 64KB; 20 -> 1MB; etc.)
+     *  Increasing memory usage improves compression ratio
+     *  Reduced memory usage can improve speed, due to cache effect
+     *  Recommended max value is 14, for 16KB, which nicely fits into Intel x86 L1 cache */
     /* **************************************************************
-    *  Includes
-    *****************************************************************/
+     *  Includes
+     *****************************************************************/
     /* **************************************************************
-    *  Compiler specifics
-    *****************************************************************/
+     *  Compiler specifics
+     *****************************************************************/
     /* Visual Studio */
     /* **************************************************************
-    *  Local type
-    ****************************************************************/
+     *  Local type
+     ****************************************************************/
     #[derive(BitfieldStruct, Clone, Copy)]
     #[repr(C)]
     pub struct FSE_decode_tU16 {
@@ -470,8 +470,6 @@ use self::error_public_h::{
     FSE_error_workSpace_tooSmall,
 };
 use self::fseU16_c::{DTable_max_t, FSE_decode_tU16};
-use super::entropy_common::FSE_readNCount;
-use super::fse_compress::{FSE_normalizeCount, FSE_optimalTableLog, FSE_writeNCount };
 use self::fse_h::{
     FSE_CState_t, FSE_CTable, FSE_DState_t, FSE_DTable, FSE_DTableHeader,
     FSE_symbolCompressionTransform,
@@ -479,6 +477,8 @@ use self::fse_h::{
 use self::mem_h::{unalign16, unalign32, unalign64, unnamed, BYTE, S16, U16, U32, U64};
 use self::stddef_h::{ptrdiff_t, size_t};
 use self::string_h::{memcpy, memset};
+use super::entropy_common::FSE_readNCount;
+use super::fse_compress::{FSE_normalizeCount, FSE_optimalTableLog, FSE_writeNCount};
 use c2rust_bitfields::BitfieldStruct;
 /* ******************************************************************
    FSEU16 : Finite State Entropy coder for 16-bits input

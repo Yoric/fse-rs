@@ -14,10 +14,10 @@ use super::huf_compress_c::HUF_CElt_s;
 use super::mem_common::{BYTE, U32};
 extern "C" {
     /* ! HUF_readStats() :
-        *  Read compact Huffman tree, saved by HUF_writeCTable().
-        * `huffWeight` is destination buffer.
-        * @return : size read from `src` , or an error Code .
-        *  Note : Needed by HUF_readCTable() and HUF_readDTableXn() . */
+     *  Read compact Huffman tree, saved by HUF_writeCTable().
+     * `huffWeight` is destination buffer.
+     * @return : size read from `src` , or an error Code .
+     *  Note : Needed by HUF_readCTable() and HUF_readDTableXn() . */
     #[no_mangle]
     pub fn HUF_readStats(
         huffWeight: *mut BYTE,

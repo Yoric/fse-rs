@@ -5,14 +5,14 @@ mod fse_decompress;
 mod fuzzer;
 mod fuzzerHuff0;
 mod hist;
-mod huf_compress;
 mod huf_common;
+mod huf_compress;
 mod huf_decompress;
 mod mem_common;
 mod probaGenerator;
 mod string_common;
-mod xxhash;
 mod types;
+mod xxhash;
 mod zlibh;
 
 pub use self::entropy_common::*;

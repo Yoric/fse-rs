@@ -65,9 +65,9 @@ pub mod huf_compress_c {
         pub base: U32,
         pub current: U32,
     }
+    use super::super::mem_common::{BYTE, U16, U32};
     use super::_size_t_h::size_t;
     use super::huf_h::HUF_CElt;
-    use super::super::mem_common::{BYTE, U16, U32};
 }
 
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/error_public.h"]
@@ -156,19 +156,19 @@ pub mod bitstream_h {
        - Source repository : https://github.com/Cyan4973/FiniteStateEntropy
     ****************************************************************** */
     /*
-    *  This API consists of small unitary functions, which must be inlined for best performance.
-    *  Since link-time-optimization is not available for all compilers,
-    *  these functions are defined into a .h to be included.
-    */
+     *  This API consists of small unitary functions, which must be inlined for best performance.
+     *  Since link-time-optimization is not available for all compilers,
+     *  these functions are defined into a .h to be included.
+     */
     /*-****************************************
-    *  Dependencies
-    ******************************************/
+     *  Dependencies
+     ******************************************/
     /*=========================================
     *  Target specific
     =========================================*/
     /*-******************************************
-    *  bitStream encoding API (write forward)
-    ********************************************/
+     *  bitStream encoding API (write forward)
+     ********************************************/
     /* bitStream can mix input from multiple sources.
      * A critical property of these streams is that they encode and decode in **reverse** direction.
      * So the first bit sequence you add will be the last to be read, like a LIFO stack.
@@ -193,8 +193,8 @@ pub mod fse_h {
     use super::_size_t_h::size_t;
     extern "C" {
         /*-*****************************************
-        *  FSE detailed API
-        ******************************************/
+         *  FSE detailed API
+         ******************************************/
         /*!
         FSE_compress() does the following:
         1. count symbol occurrence from source[] into table count[] (see hist.h)
@@ -291,8 +291,8 @@ pub mod fse_h {
         /* FSE_H */
         /* *** Dependency *** */
         /* *****************************************
-        *  Static allocation
-        *******************************************/
+         *  Static allocation
+         *******************************************/
         /* FSE buffer bounds */
         /* Macro version, useful for static allocation */
         /* It is possible to statically allocate FSE CTable/DTable as a table of FSE_CTable/FSE_DTable using below macros */

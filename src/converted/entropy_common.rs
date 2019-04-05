@@ -97,16 +97,16 @@ pub mod error_private_h {
     ****************************************************************** */
     /* Note : this module is expected to remain private, do not expose it */
     /* ****************************************
-    *  Dependencies
-    ******************************************/
+     *  Dependencies
+     ******************************************/
     /* size_t */
     /* ****************************************
-    *  Compiler-specific
-    ******************************************/
+     *  Compiler-specific
+     ******************************************/
     /* C99 */
     /*-****************************************
-    *  Customization (error_public.h)
-    ******************************************/
+     *  Customization (error_public.h)
+     ******************************************/
     pub type ERR_enum = FSE_ErrorCode;
     use super::error_public_h::FSE_ErrorCode;
 }
@@ -144,8 +144,8 @@ pub mod assert_h {
 }
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/huf.h"]
 pub mod huf_h {
-    use ::converted::mem_common::{BYTE, U32};
     use super::stddef_h::size_t;
+    use converted::mem_common::{BYTE, U32};
 }
 use self::_uint32_t_h::uint32_t;
 use self::_uint8_t_h::uint8_t;
@@ -158,9 +158,9 @@ use self::error_public_h::{
     FSE_error_workSpace_tooSmall,
 };
 use self::fse_h::{FSE_DTable, FSE_decompress_wksp};
-use ::converted::mem_common::{unalign32, unnamed, BYTE, U32};
 use self::stddef_h::size_t;
-use ::converted::string_common::{memcpy, memset};
+use converted::mem_common::{unalign32, unnamed, BYTE, U32};
+use converted::string_common::{memcpy, memset};
 unsafe extern "C" fn MEM_isLittleEndian() -> libc::c_uint {
     /* don't use static : performance detrimental  */
     let one: unnamed = unnamed { u: 1i32 as U32 };

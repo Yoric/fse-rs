@@ -1,5 +1,4 @@
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/mem.h"]
-
 pub use super::types::*;
 
 /*-**************************************************************

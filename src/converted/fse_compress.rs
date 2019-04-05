@@ -35,8 +35,8 @@ pub mod stddef_h {
 #[header_src = "/Volumes/Code/dteller/blurbs/FiniteStateEntropy/lib/mem.h"]
 pub mod mem_h {
     /*-**************************************************************
-    *  Basic Types
-    *****************************************************************/
+     *  Basic Types
+     *****************************************************************/
     /* C99 */
     pub type BYTE = uint8_t;
     pub type U16 = uint16_t;
@@ -158,21 +158,21 @@ pub mod bitstream_h {
        - Source repository : https://github.com/Cyan4973/FiniteStateEntropy
     ****************************************************************** */
     /*
-    *  This API consists of small unitary functions, which must be inlined for best performance.
-    *  Since link-time-optimization is not available for all compilers,
-    *  these functions are defined into a .h to be included.
-    */
+     *  This API consists of small unitary functions, which must be inlined for best performance.
+     *  Since link-time-optimization is not available for all compilers,
+     *  these functions are defined into a .h to be included.
+     */
     /*-****************************************
-    *  Dependencies
-    ******************************************/
+     *  Dependencies
+     ******************************************/
     /* unaligned access routines */
     /* assert(), DEBUGLOG(), RAWLOG() */
     /*=========================================
     *  Target specific
     =========================================*/
     /*-******************************************
-    *  bitStream encoding API (write forward)
-    ********************************************/
+     *  bitStream encoding API (write forward)
+     ********************************************/
     /* bitStream can mix input from multiple sources.
      * A critical property of these streams is that they encode and decode in **reverse** direction.
      * So the first bit sequence you add will be the last to be read, like a LIFO stack.
@@ -212,8 +212,8 @@ pub mod fse_h {
     /* don't allocate that. It's only meant to be more restrictive than void* */
     pub type FSE_CTable = libc::c_uint;
     /* *****************************************
-    *  FSE symbol compression API
-    *******************************************/
+     *  FSE symbol compression API
+     *******************************************/
     /*
        This API consists of small unitary functions, which highly benefit from being inlined.
        Hence their body are included in next section.
@@ -228,8 +228,8 @@ pub mod fse_h {
     }
     /* faster, but works only if nbBits is always >= 1 (otherwise, result will be corrupted) */
     /* *****************************************
-    *  Implementation of inlined functions
-    *******************************************/
+     *  Implementation of inlined functions
+     *******************************************/
     #[derive(Copy, Clone)]
     #[repr(C)]
     pub struct FSE_symbolCompressionTransform {

@@ -81,8 +81,8 @@ extern "C" {
         srcSize: size_t,
     ) -> size_t;
     /*-****************************************
-    *  FSE simple functions
-    ******************************************/
+     *  FSE simple functions
+     ******************************************/
     /* FSE_compress() :
         Compress content of buffer 'src', of size 'srcSize', into destination buffer 'dst'.
         'dst' buffer must be already allocated. Compression runs faster is dstCapacity >= FSE_compressBound(srcSize).
@@ -121,8 +121,8 @@ extern "C" {
     #[no_mangle]
     fn FSE_getErrorName(code: size_t) -> *const libc::c_char;
     /*-*****************************************
-    *  FSE detailed API
-    ******************************************/
+     *  FSE detailed API
+     ******************************************/
     /*
     FSE_compress() does the following:
     1. count symbol occurrence from source[] into table count[] (see hist.h)
