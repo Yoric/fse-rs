@@ -1,0 +1,13 @@
+[package]
+name = "fse-rs"
+authors = ["C2Rust"]
+version = "0.0.1"
+publish = false
+license = "BSD-2"
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
+c2rust-bitfields = { path = "../c2rust/c2rust-bitfields" }
+libc = "*"
